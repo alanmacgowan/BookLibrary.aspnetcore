@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  booklibrary.aspnetcore:
+    image: booklibrary.aspnetcore
+    build:
+      context: ./BookLibrary.aspnetcore
+      dockerfile: Dockerfile
