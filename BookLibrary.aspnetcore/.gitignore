@@ -30,6 +30,7 @@ Obj/
 .vs/
 /wwwroot/dist/
 /ClientApp/dist/
+/wwwroot/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
