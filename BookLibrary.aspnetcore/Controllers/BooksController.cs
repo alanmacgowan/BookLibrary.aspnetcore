@@ -66,7 +66,7 @@ namespace BookLibrary.aspnetcore.Controllers
                     book = JsonConvert.DeserializeObject<Book>(result);
 
                 }
-                return View(book);
+                return View(_mapper.Map<Book, BookViewModel>(book));
             }
         }
 

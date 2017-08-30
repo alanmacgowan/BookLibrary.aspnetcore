@@ -36,10 +36,10 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public Book Get(int id)
         {
             var book = _context.Books
-                    .Include(b => b.Author)
-                    .Include(b => b.Publisher)
-                    .AsNoTracking()
-                    .SingleOrDefault(m => m.ID == id);
+                               .Include(b => b.Author)
+                               .Include(b => b.Publisher)
+                               .AsNoTracking()
+                               .SingleOrDefault(m => m.ID == id);
 
             return book;
         }
