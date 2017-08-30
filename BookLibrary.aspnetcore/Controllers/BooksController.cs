@@ -157,36 +157,47 @@ namespace BookLibrary.aspnetcore.Controllers
             return View(bookVM);
         }
 
-        //// GET: Books/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Books/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var book = await _context.Books
-        //        .Include(b => b.Author)
-        //        .Include(b => b.Publisher)
-        //        .SingleOrDefaultAsync(m => m.ID == id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var book = new Book();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
 
-        //    return View(book);
-        //}
+                var response = await client.GetAsync("api/Books/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    book = await response.Content.ReadAsAsync<Book>();
+                }
+                return View(_mapper.Map<Book, BookViewModel>(book));
+            }
 
-        //// POST: Books/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var book = await _context.Books.SingleOrDefaultAsync(m => m.ID == id);
-        //    _context.Books.Remove(book);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return View(book);
+        }
+
+        // POST: Books/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+
+                var response = await client.DeleteAsync("api/Books/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model BookLibrary.aspnetcore.Domain.Book
+﻿@model BookLibrary.aspnetcore.UI.Models.BookViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -60,16 +60,16 @@
             @Html.DisplayFor(model => model.Pages)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.AuthorName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Author.ID)
+            @Html.DisplayFor(model => model.AuthorName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Publisher)
+            @Html.DisplayNameFor(model => model.PublisherName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Publisher.ID)
+            @Html.DisplayFor(model => model.PublisherName)
         </dd>
     </dl>
     

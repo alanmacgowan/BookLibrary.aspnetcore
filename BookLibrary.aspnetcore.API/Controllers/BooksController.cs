@@ -64,6 +64,9 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var book = _context.Books.SingleOrDefault(m => m.ID == id);
+            _context.Books.Remove(book);
+            _context.SaveChangesAsync();
         }
     }
 }
