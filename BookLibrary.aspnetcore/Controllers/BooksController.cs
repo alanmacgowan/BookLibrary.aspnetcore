@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.UI;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,18 +16,11 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.aspnetcore.Controllers
 {
-    public class BooksController : Controller
+    public class BooksController : BaseController
     {
-        string baseUrl;
 
-        private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
-
-        public BooksController(IMapper mapper, IConfiguration configuration)
+        public BooksController(IMapper mapper, IConfiguration configuration) : base(mapper, configuration)
         {
-            _mapper = mapper;
-            _configuration = configuration;
-            baseUrl = _configuration.GetValue<string>("AppSettings:BaseUrl");
         }
 
         // GET: Books
@@ -35,7 +29,7 @@ namespace BookLibrary.aspnetcore.Controllers
             var books = new List<Book>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseUrl);
+                client.BaseAddress = new Uri(_baseUrl);
                 var response = await client.GetAsync("api/Books");
                 if (response.IsSuccessStatusCode)
                 {
@@ -56,7 +50,7 @@ namespace BookLibrary.aspnetcore.Controllers
             var book = new Book();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseUrl);
+                client.BaseAddress = new Uri(_baseUrl);
 
                 var response = await client.GetAsync("api/Books/" + id);
                 if (response.IsSuccessStatusCode)
@@ -86,7 +80,7 @@ namespace BookLibrary.aspnetcore.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(baseUrl);
+                    client.BaseAddress = new Uri(_baseUrl);
 
                     var response = await client.PostAsJsonAsync("api/Books/", _mapper.Map<BookViewModel, Book>(bookVM));
                     if (!response.IsSuccessStatusCode)
