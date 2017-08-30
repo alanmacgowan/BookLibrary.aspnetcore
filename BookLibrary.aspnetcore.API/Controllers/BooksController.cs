@@ -21,38 +21,40 @@ namespace BookLibrary.aspnetcore.API.Controllers
 
         // GET api/books
         [HttpGet]
-        public IEnumerable<Book> GetAll()
+        public async Task<IEnumerable<Book>> GetAll()
         {
             var bookLibraryContext = _context.Books
                                              .Include(b => b.Author)
                                              .Include(b => b.Publisher)
                                              .AsNoTracking();
 
-            return bookLibraryContext.ToList();
+            return await bookLibraryContext.ToListAsync();
         }
 
         // GET api/books/5
         [HttpGet("{id}")]
-        public Book Get(int id)
+        public async Task<Book> Get(int id)
         {
-            var book = _context.Books
+            var book = await _context.Books
                                .Include(b => b.Author)
                                .Include(b => b.Publisher)
                                .AsNoTracking()
-                               .SingleOrDefault(m => m.ID == id);
+                               .SingleOrDefaultAsync(m => m.ID == id);
 
             return book;
         }
 
         // POST api/books
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Book book)
         {
+            _context.Add(book);
+            _context.SaveChangesAsync();
         }
 
         // PUT api/books/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Book book)
         {
         }
 

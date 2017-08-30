@@ -31,14 +31,10 @@ namespace BookLibrary.aspnetcore.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
                 var response = await client.GetAsync("api/Books");
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = response.Content.ReadAsStringAsync().Result;
-                    books = JsonConvert.DeserializeObject<List<Book>>(result);
+                    books = await response.Content.ReadAsAsync<List<Book>>();
                 }
                 return View(_mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books));
             }
@@ -56,45 +52,49 @@ namespace BookLibrary.aspnetcore.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await client.GetAsync("api/Books/" + id);
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = response.Content.ReadAsStringAsync().Result;
-                    book = JsonConvert.DeserializeObject<Book>(result);
-
+                    book = await response.Content.ReadAsAsync<Book>();
                 }
                 return View(_mapper.Map<Book, BookViewModel>(book));
             }
         }
 
         //// GET: Books/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID");
-        //    ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID");
-        //    return View();
-        //}
+        public IActionResult Create()
+        {
+            //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID");
+            //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID");
+            return View();
+        }
 
         //// POST: Books/Create
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] Book book)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(book);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-        //    ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
-        //    return View(book);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] BookViewModel bookVM)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+
+                    var response = await client.PostAsJsonAsync("api/Books/", _mapper.Map<BookViewModel, Book>(bookVM));
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        View(bookVM);
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
+            //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
+            return View(bookVM);
+        }
 
         //// GET: Books/Edit/5
         //public async Task<IActionResult> Edit(int? id)
