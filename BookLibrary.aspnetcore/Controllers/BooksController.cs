@@ -61,7 +61,7 @@ namespace BookLibrary.aspnetcore.Controllers
             }
         }
 
-        //// GET: Books/Create
+        // GET: Books/Create
         public IActionResult Create()
         {
             //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID");
@@ -69,9 +69,9 @@ namespace BookLibrary.aspnetcore.Controllers
             return View();
         }
 
-        //// POST: Books/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Books/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] BookViewModel bookVM)
@@ -95,60 +95,67 @@ namespace BookLibrary.aspnetcore.Controllers
             return View(bookVM);
         }
 
-        //// GET: Books/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Books/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var book = await _context.Books.SingleOrDefaultAsync(m => m.ID == id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-        //    ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
-        //    return View(book);
-        //}
+            var book = new Book();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
 
-        //// POST: Books/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] Book book)
-        //{
-        //    if (id != book.ID)
-        //    {
-        //        return NotFound();
-        //    }
+                var response = await client.GetAsync("api/Books/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    book = await response.Content.ReadAsAsync<Book>();
+                }
+                //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
+                //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
+                return View(_mapper.Map<Book, BookViewModel>(book));
+            }
+        }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(book);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BookExists(book.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-        //    ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
-        //    return View(book);
-        //}
+        // POST: Books/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] BookViewModel bookVM)
+        {
+            if (id != bookVM.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(_baseUrl);
+
+                        var response = await client.PutAsJsonAsync("api/Books/", _mapper.Map<BookViewModel, Book>(bookVM));
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            View(bookVM);
+                        }
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+            //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
+            //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
+            return View(bookVM);
+        }
 
         //// GET: Books/Delete/5
         //public async Task<IActionResult> Delete(int? id)
@@ -181,9 +188,5 @@ namespace BookLibrary.aspnetcore.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool BookExists(int id)
-        //{
-        //    return _context.Books.Any(e => e.ID == id);
-        //}
     }
 }

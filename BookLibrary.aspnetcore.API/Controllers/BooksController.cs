@@ -56,6 +56,8 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Book book)
         {
+            _context.Update(book);
+            _context.SaveChangesAsync();
         }
 
         // DELETE api/books/5
