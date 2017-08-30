@@ -23,12 +23,12 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Book>> GetAll()
         {
-            var bookLibraryContext = _context.Books
-                                             .Include(b => b.Author)
-                                             .Include(b => b.Publisher)
-                                             .AsNoTracking();
+            var books = _context.Books
+                                .Include(b => b.Author)
+                                .Include(b => b.Publisher)
+                                .AsNoTracking();
 
-            return await bookLibraryContext.ToListAsync();
+            return await books.ToListAsync();
         }
 
         // GET api/books/5
@@ -36,10 +36,10 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public async Task<Book> Get(int id)
         {
             var book = await _context.Books
-                               .Include(b => b.Author)
-                               .Include(b => b.Publisher)
-                               .AsNoTracking()
-                               .SingleOrDefaultAsync(m => m.ID == id);
+                                     .Include(b => b.Author)
+                                     .Include(b => b.Publisher)
+                                     .AsNoTracking()
+                                     .SingleOrDefaultAsync(m => m.ID == id);
 
             return book;
         }
@@ -49,7 +49,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public void Post([FromBody]Book book)
         {
             _context.Add(book);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         // PUT api/books/5
@@ -57,7 +57,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public void Put(int id, [FromBody]Book book)
         {
             _context.Update(book);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         // DELETE api/books/5
@@ -66,7 +66,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         {
             var book = _context.Books.SingleOrDefault(m => m.ID == id);
             _context.Books.Remove(book);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

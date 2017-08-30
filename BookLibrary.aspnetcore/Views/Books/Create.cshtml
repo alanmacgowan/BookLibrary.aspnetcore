@@ -1,4 +1,4 @@
-﻿@model BookLibrary.aspnetcore.UI.Models.BookViewModel
+﻿@model BookLibrary.aspnetcore.UI.Models.BookEditViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -54,11 +54,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="PublisherID" class="control-label"></label>
-                <select asp-for="PublisherID" class ="form-control" asp-items="ViewBag.PublisherID"></select>
+                <select asp-for="PublisherID" class="form-control" asp-items="@(new SelectList(Model.Publishers,"ID","Name"))"></select>
+                <span asp-validation-for="PublisherID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AuthorID" class="control-label"></label>
-                <select asp-for="AuthorID" class ="form-control" asp-items="ViewBag.AuthorID"></select>
+                <select asp-for="AuthorID" class="form-control" asp-items="@(new SelectList(Model.Authors,"ID","LastName"))"></select>
+                <span asp-validation-for="AuthorID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

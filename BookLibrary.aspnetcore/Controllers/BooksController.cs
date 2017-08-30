@@ -62,11 +62,12 @@ namespace BookLibrary.aspnetcore.Controllers
         }
 
         // GET: Books/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID");
-            //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID");
-            return View();
+            var bookVM = new BookEditViewModel();
+            bookVM.Authors = await GetAuthors();
+            bookVM.Publishers = await GetPublishers();
+            return View(bookVM);
         }
 
         // POST: Books/Create
@@ -90,8 +91,6 @@ namespace BookLibrary.aspnetcore.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-            //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
             return View(bookVM);
         }
 
@@ -113,15 +112,14 @@ namespace BookLibrary.aspnetcore.Controllers
                 {
                     book = await response.Content.ReadAsAsync<Book>();
                 }
-                //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-                //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
-                return View(_mapper.Map<Book, BookViewModel>(book));
+                var bookVM = _mapper.Map<Book, BookEditViewModel>(book);
+                bookVM.Authors = await GetAuthors();
+                bookVM.Publishers = await GetPublishers();
+                return View(bookVM);
             }
         }
 
         // POST: Books/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] BookViewModel bookVM)
@@ -139,7 +137,7 @@ namespace BookLibrary.aspnetcore.Controllers
                     {
                         client.BaseAddress = new Uri(_baseUrl);
 
-                        var response = await client.PutAsJsonAsync("api/Books/", _mapper.Map<BookViewModel, Book>(bookVM));
+                        var response = await client.PutAsJsonAsync("api/Books/" + id, _mapper.Map<BookViewModel, Book>(bookVM));
                         if (!response.IsSuccessStatusCode)
                         {
                             View(bookVM);
@@ -152,8 +150,6 @@ namespace BookLibrary.aspnetcore.Controllers
                     throw;
                 }
             }
-            //ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-            //ViewData["PublisherID"] = new SelectList(_context.Publishers, "ID", "ID", book.PublisherID);
             return View(bookVM);
         }
 
@@ -177,8 +173,6 @@ namespace BookLibrary.aspnetcore.Controllers
                 }
                 return View(_mapper.Map<Book, BookViewModel>(book));
             }
-
-            return View(book);
         }
 
         // POST: Books/Delete/5
@@ -197,6 +191,36 @@ namespace BookLibrary.aspnetcore.Controllers
                 }
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        private async Task<List<AuthorViewModel>> GetAuthors()
+        {
+            var authors = new List<Author>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = await client.GetAsync("api/Authors");
+                if (response.IsSuccessStatusCode)
+                {
+                    authors = await response.Content.ReadAsAsync<List<Author>>();
+                }
+                return _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors).ToList();
+            }
+        }
+
+        private async Task<List<PublisherViewModel>> GetPublishers()
+        {
+            var publishers = new List<Publisher>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = await client.GetAsync("api/Publishers");
+                if (response.IsSuccessStatusCode)
+                {
+                    publishers = await response.Content.ReadAsAsync<List<Publisher>>();
+                }
+                return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers).ToList();
+            }
         }
 
     }
