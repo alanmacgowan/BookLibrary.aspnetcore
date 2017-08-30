@@ -27,7 +27,11 @@ namespace BookLibrary.aspnetcore.API
         {
             services.AddDbContext<BookLibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc();
+            services.AddMvc()
+                    .AddJsonOptions(
+                    // Ignore: will not serialize an object if it is a child object of itself
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

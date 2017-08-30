@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookLibrary.aspnetcore.Domain.Book>
+﻿@model IEnumerable<BookLibrary.aspnetcore.UI.Models.BookViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -37,10 +37,10 @@
                     @Html.DisplayNameFor(model => model.Pages)
                 </th>
             <th>
-                @Html.DisplayNameFor(model => model.Author)
+                @Html.DisplayNameFor(model => model.AuthorName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Publisher)
+                @Html.DisplayNameFor(model => model.PublisherName)
             </th>
             <th></th>
         </tr>
@@ -73,10 +73,10 @@
                 @Html.DisplayFor(modelItem => item.Pages)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Author.ID)
+                @Html.DisplayFor(modelItem => item.AuthorName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Publisher.ID)
+                @Html.DisplayFor(modelItem => item.PublisherName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

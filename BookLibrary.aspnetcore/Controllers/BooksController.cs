@@ -1,9 +1,13 @@
-﻿using BookLibrary.aspnetcore.Domain;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -14,10 +18,12 @@ namespace BookLibrary.aspnetcore.Controllers
     {
         string Baseurl = "http://localhost:5000/";
 
-        public BooksController()
+        private readonly IMapper _mapper;
+        public BooksController(IMapper mapper)
         {
+            _mapper = mapper;
         }
-        
+
         // GET: Books
         public async Task<IActionResult> Index()
         {
@@ -33,31 +39,36 @@ namespace BookLibrary.aspnetcore.Controllers
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
                     books = JsonConvert.DeserializeObject<List<Book>>(result);
-
                 }
-                return View(books);
+                return View(_mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books));
             }
         }
 
-        //// GET: Books/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Books/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var book = await _context.Books
-        //        .Include(b => b.Author)
-        //        .Include(b => b.Publisher)
-        //        .SingleOrDefaultAsync(m => m.ID == id);
-        //    if (book == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var book = new Book();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    return View(book);
-        //}
+                var response = await client.GetAsync("api/Books/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    book = JsonConvert.DeserializeObject<Book>(result);
+
+                }
+                return View(book);
+            }
+        }
 
         //// GET: Books/Create
         //public IActionResult Create()

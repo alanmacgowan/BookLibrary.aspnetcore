@@ -23,15 +23,25 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpGet]
         public IEnumerable<Book> GetAll()
         {
-            var bookLibraryContext = _context.Books.AsNoTracking();//.Include(b => b.Author).Include(b => b.Publisher);
+            var bookLibraryContext = _context.Books
+                                             .Include(b => b.Author)
+                                             .Include(b => b.Publisher)
+                                             .AsNoTracking();
+
             return bookLibraryContext.ToList();
         }
 
         // GET api/books/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Book Get(int id)
         {
-            return "value";
+            var book = _context.Books
+                    .Include(b => b.Author)
+                    .Include(b => b.Publisher)
+                    .AsNoTracking()
+                    .SingleOrDefault(m => m.ID == id);
+
+            return book;
         }
 
         // POST api/books
