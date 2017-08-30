@@ -4,6 +4,7 @@ using BookLibrary.aspnetcore.Domain;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,16 @@ namespace BookLibrary.aspnetcore.Controllers
 {
     public class BooksController : Controller
     {
-        string Baseurl = "http://localhost:5000/";
+        string baseUrl;
 
         private readonly IMapper _mapper;
-        public BooksController(IMapper mapper)
+        private readonly IConfiguration _configuration;
+
+        public BooksController(IMapper mapper, IConfiguration configuration)
         {
             _mapper = mapper;
+            _configuration = configuration;
+            baseUrl = _configuration.GetValue<string>("AppSettings:BaseUrl");
         }
 
         // GET: Books
@@ -30,7 +35,7 @@ namespace BookLibrary.aspnetcore.Controllers
             var books = new List<Book>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl);
+                client.BaseAddress = new Uri(baseUrl);
                 var response = await client.GetAsync("api/Books");
                 if (response.IsSuccessStatusCode)
                 {
@@ -51,7 +56,7 @@ namespace BookLibrary.aspnetcore.Controllers
             var book = new Book();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl);
+                client.BaseAddress = new Uri(baseUrl);
 
                 var response = await client.GetAsync("api/Books/" + id);
                 if (response.IsSuccessStatusCode)
@@ -81,7 +86,7 @@ namespace BookLibrary.aspnetcore.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(Baseurl);
+                    client.BaseAddress = new Uri(baseUrl);
 
                     var response = await client.PostAsJsonAsync("api/Books/", _mapper.Map<BookViewModel, Book>(bookVM));
                     if (!response.IsSuccessStatusCode)

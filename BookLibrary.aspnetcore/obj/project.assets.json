@@ -13194,6 +13194,7 @@
       "BookLibrary.aspnetcore.Domain >= 1.0.0",
       "Microsoft.AspNet.WebApi.Client >= 5.2.3",
       "Microsoft.AspNetCore.All >= 2.0.0",
+      "Microsoft.Extensions.Options.ConfigurationExtensions >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0"
     ]
@@ -13254,6 +13255,10 @@
             "target": "Package",
             "version": "2.0.0",
             "autoReferenced": true
+          },
+          "Microsoft.Extensions.Options.ConfigurationExtensions": {
+            "target": "Package",
+            "version": "2.0.0"
           },
           "AutoMapper": {
             "target": "Package",
