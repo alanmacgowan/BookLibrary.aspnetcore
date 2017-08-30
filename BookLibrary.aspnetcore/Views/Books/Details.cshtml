@@ -1,4 +1,4 @@
-﻿@model BookLibrary.aspnetcore.Models.Book
+﻿@model BookLibrary.aspnetcore.Domain.Book
 
 @{
     ViewData["Title"] = "Details";
@@ -62,13 +62,13 @@
             @Html.DisplayNameFor(model => model.Author)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Author.ID)
+            @Html.DisplayFor(model => model.Author.LastName), @Html.DisplayFor(model => model.Author.FirstName) 
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Publisher)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Publisher.ID)
+            @Html.DisplayFor(model => model.Publisher.Name)
         </dd>
     </dl>
 </div>

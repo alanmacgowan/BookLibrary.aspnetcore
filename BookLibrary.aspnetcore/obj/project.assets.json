@@ -5030,21 +5030,6 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "BookLibrary.aspnetcore.Data/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "dependencies": {
-          "BookLibrary.aspnetcore.Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "2.0.0",
-          "Microsoft.EntityFrameworkCore.Relational": "2.0.0"
-        },
-        "compile": {
-          "bin/placeholder/BookLibrary.aspnetcore.Data.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/BookLibrary.aspnetcore.Data.dll": {}
-        }
-      },
       "BookLibrary.aspnetcore.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -13131,11 +13116,6 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "BookLibrary.aspnetcore.Data/1.0.0": {
-      "type": "project",
-      "path": "../../BookLibrary.aspnetcore.Data/BookLibrary.aspnetcore.Data.csproj",
-      "msbuildProject": "../../BookLibrary.aspnetcore.Data/BookLibrary.aspnetcore.Data.csproj"
-    },
     "BookLibrary.aspnetcore.Domain/1.0.0": {
       "type": "project",
       "path": "../BookLibrary.aspnetcore.Domain/BookLibrary.aspnetcore.Domain.csproj",
@@ -13144,7 +13124,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "BookLibrary.aspnetcore.Data >= 1.0.0",
+      "BookLibrary.aspnetcore.Domain >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0"
@@ -13183,8 +13163,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\CODE\\ASP.NET Core\\BookLibrary.aspnetcore.Data\\BookLibrary.aspnetcore.Data.csproj": {
-              "projectPath": "C:\\CODE\\ASP.NET Core\\BookLibrary.aspnetcore.Data\\BookLibrary.aspnetcore.Data.csproj"
+            "C:\\CODE\\ASP.NET Core\\BookLibrary.aspnetcore\\BookLibrary.aspnetcore.Domain\\BookLibrary.aspnetcore.Domain.csproj": {
+              "projectPath": "C:\\CODE\\ASP.NET Core\\BookLibrary.aspnetcore\\BookLibrary.aspnetcore.Domain\\BookLibrary.aspnetcore.Domain.csproj"
             }
           }
         }
