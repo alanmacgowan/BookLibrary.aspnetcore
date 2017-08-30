@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookLibrary.aspnetcore.Models
+namespace BookLibrary.aspnetcore.Domain
 {
     public enum Gender
     {
