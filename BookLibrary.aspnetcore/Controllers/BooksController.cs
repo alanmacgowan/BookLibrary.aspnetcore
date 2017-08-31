@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.Services;
 using BookLibrary.aspnetcore.UI;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,24 +19,17 @@ namespace BookLibrary.aspnetcore.Controllers
 {
     public class BooksController : BaseController
     {
+        private IBookService _bookService;
 
-        public BooksController(IMapper mapper, IConfiguration configuration) : base(mapper, configuration)
+        public BooksController(IMapper mapper, IBookService bookService) : base(mapper)
         {
+            _bookService = bookService;
         }
 
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            var books = new List<Book>();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_baseUrl);
-                var response = await client.GetAsync("api/Books");
-                if (response.IsSuccessStatusCode)
-                {
-                    books = await response.Content.ReadAsAsync<List<Book>>();
-                }
-            }
+            var books = await _bookService.GetAll();
 
             return View(_mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books));
        }
@@ -43,22 +37,12 @@ namespace BookLibrary.aspnetcore.Controllers
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            var book = new Book();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_baseUrl);
-
-                var response = await client.GetAsync("api/Books/" + id);
-                if (response.IsSuccessStatusCode)
-                {
-                    book = await response.Content.ReadAsAsync<Book>();
-                }
-            }
+            var book = await _bookService.Get(id.Value);
 
             return View(_mapper.Map<Book, BookViewModel>(book));
        }
@@ -79,15 +63,11 @@ namespace BookLibrary.aspnetcore.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(_baseUrl);
+                var created = await _bookService.Create(_mapper.Map<BookViewModel, Book>(bookVM));
 
-                    var response = await client.PostAsJsonAsync("api/Books/", _mapper.Map<BookViewModel, Book>(bookVM));
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        View(bookVM);
-                    }
+                if (!created)
+                {
+                    View(bookVM);
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -99,22 +79,12 @@ namespace BookLibrary.aspnetcore.Controllers
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            var book = new Book();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_baseUrl);
-
-                var response = await client.GetAsync("api/Books/" + id);
-                if (response.IsSuccessStatusCode)
-                {
-                    book = await response.Content.ReadAsAsync<Book>();
-                }
-            }
+            var book = await _bookService.Get(id.Value);
 
             var bookVM = _mapper.Map<Book, BookEditViewModel>(book);
             bookVM.Authors = await GetAuthors();
@@ -134,15 +104,11 @@ namespace BookLibrary.aspnetcore.Controllers
 
             if (ModelState.IsValid)
             {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(_baseUrl);
+                var edited = await _bookService.Update(_mapper.Map<BookViewModel, Book>(bookVM));
 
-                    var response = await client.PutAsJsonAsync("api/Books/" + id, _mapper.Map<BookViewModel, Book>(bookVM));
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        View(bookVM);
-                    }
+                if (!edited)
+                {
+                    View(bookVM);
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -153,22 +119,12 @@ namespace BookLibrary.aspnetcore.Controllers
         // GET: Books/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            var book = new Book();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_baseUrl);
-
-                var response = await client.GetAsync("api/Books/" + id);
-                if (response.IsSuccessStatusCode)
-                {
-                    book = await response.Content.ReadAsAsync<Book>();
-                }
-            }
+            var book = await _bookService.Get(id.Value);
 
             return View(_mapper.Map<Book, BookViewModel>(book));
         }
@@ -178,16 +134,13 @@ namespace BookLibrary.aspnetcore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_baseUrl);
+            var deleted = await _bookService.Delete(id);
 
-                var response = await client.DeleteAsync("api/Books/" + id);
-                if (response.IsSuccessStatusCode)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
+            if (!deleted)
+            {
+                return RedirectToAction(nameof(Index));
             }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -196,7 +149,7 @@ namespace BookLibrary.aspnetcore.Controllers
             var authors = new List<Author>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_baseUrl);
+                client.BaseAddress = new Uri("http://localhost:5000/");
                 var response = await client.GetAsync("api/Authors");
                 if (response.IsSuccessStatusCode)
                 {
@@ -211,7 +164,7 @@ namespace BookLibrary.aspnetcore.Controllers
             var publishers = new List<Publisher>();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_baseUrl);
+                client.BaseAddress = new Uri("http://localhost:5000/");
                 var response = await client.GetAsync("api/Publishers");
                 if (response.IsSuccessStatusCode)
                 {

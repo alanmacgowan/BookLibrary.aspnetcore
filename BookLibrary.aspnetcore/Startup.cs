@@ -1,10 +1,12 @@
 ﻿using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.Services;
 using BookLibrary.aspnetcore.UI;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace BookLibrary.aspnetcore
 {
@@ -24,9 +26,18 @@ namespace BookLibrary.aspnetcore
             {
                 cfg.AddProfile(new AutoMapperProfileConfiguration());
             });
-
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
+
+            var configBuilder = new ConfigurationBuilder()
+                                                        .SetBasePath(Directory.GetCurrentDirectory())
+                                                        .AddJsonFile("appsettings.json");
+            var configuration = configBuilder.Build();
+
+            services.AddOptions();
+
+            services.AddTransient<IBookService, BookService>(s => new BookService(configuration.GetValue<string>("AppSettings:BaseUrl")));
+
             services.AddMvc();
         }
 

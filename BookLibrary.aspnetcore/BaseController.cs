@@ -10,15 +10,11 @@ namespace BookLibrary.aspnetcore.UI
 {
     public class BaseController : Controller
     {
-        protected readonly string _baseUrl;
         protected readonly IMapper _mapper;
-        protected readonly IConfiguration _configuration;
 
-        public BaseController(IMapper mapper, IConfiguration configuration)
+        public BaseController(IMapper mapper)
         {
             _mapper = mapper;
-            _configuration = configuration;
-            _baseUrl = _configuration.GetValue<string>("AppSettings:BaseUrl");
         }
     }
 }
