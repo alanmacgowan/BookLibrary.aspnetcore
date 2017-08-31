@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookLibrary.aspnetcore.UI
+namespace BookLibrary.aspnetcore.Controllers
 {
     public class BaseController : Controller
     {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BookLibrary.aspnetcore.Domain;
 using BookLibrary.aspnetcore.Services;
-using BookLibrary.aspnetcore.UI;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;

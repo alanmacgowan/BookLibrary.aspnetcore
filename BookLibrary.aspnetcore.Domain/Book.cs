@@ -2,7 +2,7 @@
 
 namespace BookLibrary.aspnetcore.Domain
 {
-    public class Book : BaseEntity, IBaseEntity
+    public class Book : BaseEntity
     {
         public string Title { get; set; }
         public string Description { get; set; }
