@@ -35,9 +35,10 @@ namespace BookLibrary.aspnetcore.Controllers
                 {
                     books = await response.Content.ReadAsAsync<List<Book>>();
                 }
-                return View(_mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books));
             }
-        }
+
+            return View(_mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books));
+       }
 
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -57,9 +58,10 @@ namespace BookLibrary.aspnetcore.Controllers
                 {
                     book = await response.Content.ReadAsAsync<Book>();
                 }
-                return View(_mapper.Map<Book, BookViewModel>(book));
             }
-        }
+
+            return View(_mapper.Map<Book, BookViewModel>(book));
+       }
 
         // GET: Books/Create
         public async Task<IActionResult> Create()
@@ -71,11 +73,9 @@ namespace BookLibrary.aspnetcore.Controllers
         }
 
         // POST: Books/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] BookViewModel bookVM)
+        public async Task<IActionResult> Create(BookViewModel bookVM)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +88,11 @@ namespace BookLibrary.aspnetcore.Controllers
                     {
                         View(bookVM);
                     }
-                    return RedirectToAction(nameof(Index));
                 }
-            }
+
+                return RedirectToAction(nameof(Index));
+           }
+
             return View(bookVM);
         }
 
@@ -112,17 +114,18 @@ namespace BookLibrary.aspnetcore.Controllers
                 {
                     book = await response.Content.ReadAsAsync<Book>();
                 }
-                var bookVM = _mapper.Map<Book, BookEditViewModel>(book);
-                bookVM.Authors = await GetAuthors();
-                bookVM.Publishers = await GetPublishers();
-                return View(bookVM);
             }
-        }
+
+            var bookVM = _mapper.Map<Book, BookEditViewModel>(book);
+            bookVM.Authors = await GetAuthors();
+            bookVM.Publishers = await GetPublishers();
+            return View(bookVM);
+       }
 
         // POST: Books/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Description,PublishDate,Language,Price,ISBN,Category,Pages,PublisherID,AuthorID")] BookViewModel bookVM)
+        public async Task<IActionResult> Edit(int id, BookViewModel bookVM)
         {
             if (id != bookVM.ID)
             {
@@ -131,24 +134,18 @@ namespace BookLibrary.aspnetcore.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                using (var client = new HttpClient())
                 {
-                    using (var client = new HttpClient())
-                    {
-                        client.BaseAddress = new Uri(_baseUrl);
+                    client.BaseAddress = new Uri(_baseUrl);
 
-                        var response = await client.PutAsJsonAsync("api/Books/" + id, _mapper.Map<BookViewModel, Book>(bookVM));
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            View(bookVM);
-                        }
-                        return RedirectToAction(nameof(Index));
+                    var response = await client.PutAsJsonAsync("api/Books/" + id, _mapper.Map<BookViewModel, Book>(bookVM));
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        View(bookVM);
                     }
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
+
+                return RedirectToAction(nameof(Index));
             }
             return View(bookVM);
         }
@@ -171,8 +168,9 @@ namespace BookLibrary.aspnetcore.Controllers
                 {
                     book = await response.Content.ReadAsAsync<Book>();
                 }
-                return View(_mapper.Map<Book, BookViewModel>(book));
             }
+
+            return View(_mapper.Map<Book, BookViewModel>(book));
         }
 
         // POST: Books/Delete/5

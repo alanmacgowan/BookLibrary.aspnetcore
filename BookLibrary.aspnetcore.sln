@@ -14,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.Data", "BookLibrary.aspnetcore.Data\BookLibrary.aspnetcore.Data.csproj", "{9B602A8F-FDDC-4E3F-97DF-F2DEB046861F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.aspnetcore.API", "BookLibrary.aspnetcore.API\BookLibrary.aspnetcore.API.csproj", "{01B5DBB6-9422-4684-88F3-0A3168CA847E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.API", "BookLibrary.aspnetcore.API\BookLibrary.aspnetcore.API.csproj", "{01B5DBB6-9422-4684-88F3-0A3168CA847E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.aspnetcore.Tests", "BookLibrary.aspnetcore.Tests\BookLibrary.aspnetcore.Tests.csproj", "{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{01B5DBB6-9422-4684-88F3-0A3168CA847E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01B5DBB6-9422-4684-88F3-0A3168CA847E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01B5DBB6-9422-4684-88F3-0A3168CA847E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
