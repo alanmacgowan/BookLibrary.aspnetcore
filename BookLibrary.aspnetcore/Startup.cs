@@ -1,7 +1,4 @@
-﻿using BookLibrary.aspnetcore.Domain;
-using BookLibrary.aspnetcore.Services;
-using BookLibrary.aspnetcore.UI;
-using BookLibrary.aspnetcore.UI.Models;
+﻿using BookLibrary.aspnetcore.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +33,7 @@ namespace BookLibrary.aspnetcore
 
             services.AddOptions();
 
-            services.AddTransient<IBookService, BookService>(s => new BookService(configuration.GetValue<string>("AppSettings:BaseUrl")));
+            services.AddCustomServices(configuration);
 
             services.AddMvc();
         }
