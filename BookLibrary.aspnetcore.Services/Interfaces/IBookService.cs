@@ -1,4 +1,5 @@
 ﻿using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.aspnetcore.Services
 {
-    public interface IBookService
+    public interface IBookService : IBaseService<Book>
     {
-        Task<IEnumerable<Book>> GetAll();
-        Task<Book> Get(int id);
-        Task<bool> Create(Book book);
-        Task<bool> Update(Book book);
-        Task<bool> Delete(int id);
+
     }
 }

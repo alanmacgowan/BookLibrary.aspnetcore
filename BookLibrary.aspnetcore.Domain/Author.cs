@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookLibrary.aspnetcore.Domain
 {
@@ -10,9 +8,8 @@ namespace BookLibrary.aspnetcore.Domain
         Male, Female, Other
     }
 
-    public class Author
+    public class Author : BaseEntity
     {
-        public int ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public DateTime BirthDate { get; set; }

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookLibrary.aspnetcore.Domain
 {
-    public class Book
+    public class Book : BaseEntity, IBaseEntity
     {
-        public int ID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime PublishDate { get; set; }
