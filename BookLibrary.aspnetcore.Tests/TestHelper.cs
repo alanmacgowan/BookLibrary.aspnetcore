@@ -26,6 +26,39 @@ namespace BookLibrary.aspnetcore.Tests
 
             return books;
         }
+        public static IEnumerable<Author> GetTestAuthorList()
+        {
+            var authors = new List<Author>();
 
+            authors.Add(new Author
+            {
+                FirstName = "Juan",
+                LastName = "Perez",
+                About = "This is author 1",
+                Country = "Argentina",
+                Gender = Gender.Male,
+                BirthDate = DateTime.Parse("1956-09-01")
+            });
+
+            return authors;
+        }
+        public static IEnumerable<Publisher> GetTestPublisherList()
+        {
+            var publishers = new List<Publisher>();
+
+            publishers.Add(new Publisher
+            {
+                Name="Publisher House 1",
+                Country = "Argentina"
+            });
+
+            publishers.Add(new Publisher
+            {
+                Name = "Publisher House 2",
+                Country = "Argentina"
+            });
+
+            return publishers;
+        }
     }
 }
