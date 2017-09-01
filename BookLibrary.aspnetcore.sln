@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.UI", "BookLibrary.aspnetcore\BookLibrary.aspnetcore.UI.csproj", "{04C30923-D5C5-4D4E-BDA0-EDD7857094CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.UI", "BookLibrary.aspnetcore.UI\BookLibrary.aspnetcore.UI.csproj", "{04C30923-D5C5-4D4E-BDA0-EDD7857094CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3DFD7E15-1AAF-436A-A420-E6E6755D6071} = {3DFD7E15-1AAF-436A-A420-E6E6755D6071}
 	EndProjectSection
