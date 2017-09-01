@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BookLibrary.aspnetcore.Domain;
-using BookLibrary.aspnetcore.Services;
+using BookLibrary.aspnetcore.Services.Interfaces;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,10 +14,15 @@ namespace BookLibrary.aspnetcore.Controllers
     public class BooksController : BaseController
     {
         private IBookService _bookService;
+        private IAuthorService _authorService;
+        private IPublisherService _publisherService;
 
-        public BooksController(IMapper mapper, IBookService bookService) : base(mapper)
+        public BooksController(IMapper mapper, IBookService bookService, 
+                               IAuthorService authorService, IPublisherService publisherService) : base(mapper)
         {
             _bookService = bookService;
+            _authorService = authorService;
+            _publisherService = publisherService;
         }
 
         // GET: Books
@@ -140,32 +145,16 @@ namespace BookLibrary.aspnetcore.Controllers
 
         private async Task<List<AuthorViewModel>> GetAuthors()
         {
-            var authors = new List<Author>();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:5000/");
-                var response = await client.GetAsync("api/Authors");
-                if (response.IsSuccessStatusCode)
-                {
-                    authors = await response.Content.ReadAsAsync<List<Author>>();
-                }
-                return _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors).ToList();
-            }
+            var authors = await _authorService.GetAll();
+
+            return _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors).ToList();
         }
 
         private async Task<List<PublisherViewModel>> GetPublishers()
         {
-            var publishers = new List<Publisher>();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:5000/");
-                var response = await client.GetAsync("api/Publishers");
-                if (response.IsSuccessStatusCode)
-                {
-                    publishers = await response.Content.ReadAsAsync<List<Publisher>>();
-                }
-                return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers).ToList();
-            }
+            var publishers = await _publisherService.GetAll();
+
+            return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers).ToList();
         }
 
     }

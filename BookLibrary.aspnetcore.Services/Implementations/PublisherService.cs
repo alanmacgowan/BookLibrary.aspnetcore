@@ -3,11 +3,10 @@ using BookLibrary.aspnetcore.Services.Interfaces;
 
 namespace BookLibrary.aspnetcore.Services.Implementations
 {
-    public class BookService : BaseService<Book>, IBookService
+    public class PublisherService : BaseService<Publisher>, IPublisherService
     {
-        public BookService(string baseUrl) : base(baseUrl, "api/Books/")
+        public PublisherService(string baseUrl) : base(baseUrl, "api/Publishers/")
         {
         }
-
     }
 }

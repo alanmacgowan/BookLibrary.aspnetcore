@@ -2,8 +2,7 @@
 
 namespace BookLibrary.aspnetcore.Services.Interfaces
 {
-    public interface IBookService : IBaseService<Book>
+    public interface IPublisherService : IBaseService<Publisher>
     {
-
     }
 }
