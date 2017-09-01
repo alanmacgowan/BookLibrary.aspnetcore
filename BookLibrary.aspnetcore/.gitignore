@@ -31,6 +31,7 @@ Obj/
 /wwwroot/dist/
 /ClientApp/dist/
 /wwwroot/lib/
+/.vs/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

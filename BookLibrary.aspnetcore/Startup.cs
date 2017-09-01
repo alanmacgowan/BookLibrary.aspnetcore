@@ -19,21 +19,11 @@ namespace BookLibrary.aspnetcore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperProfileConfiguration());
-            });
-            var mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
-
-            var configBuilder = new ConfigurationBuilder()
-                                                        .SetBasePath(Directory.GetCurrentDirectory())
-                                                        .AddJsonFile("appsettings.json");
-            var configuration = configBuilder.Build();
+            services.AddAutoMapper();
 
             services.AddOptions();
 
-            services.AddCustomServices(configuration);
+            services.AddCustomServices();
 
             services.AddMvc();
         }
