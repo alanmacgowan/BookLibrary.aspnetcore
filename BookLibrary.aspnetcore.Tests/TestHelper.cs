@@ -1,4 +1,5 @@
 ﻿using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,5 +61,42 @@ namespace BookLibrary.aspnetcore.Tests
 
             return publishers;
         }
+
+        public static BookViewModel GetTestBookViewModel()
+        {
+            var book = new BookViewModel
+            {
+                Title = "Book 1",
+                Description = "This is Book number 1",
+                PublishDate = DateTime.Parse("2005-09-01"),
+                ISBN = "1289189218291",
+                Category = "Comedy",
+                Pages = 111,
+                Language = "Spanish",
+                PublisherID = 1,
+                AuthorID = 1
+            };
+
+            return book;
+        }
+
+        public static Book GetTestBook()
+        {
+            var book = new Book
+            {
+                Title = "Book 1",
+                Description = "This is Book number 1",
+                PublishDate = DateTime.Parse("2005-09-01"),
+                ISBN = "1289189218291",
+                Category = "Comedy",
+                Pages = 111,
+                Language = "Spanish",
+                PublisherID = 1,
+                AuthorID = 1
+            };
+
+            return book;
+        }
+
     }
 }

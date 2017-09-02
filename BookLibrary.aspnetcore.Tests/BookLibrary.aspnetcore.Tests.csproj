@@ -15,7 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookLibrary.aspnetcore.Domain\BookLibrary.aspnetcore.Domain.csproj" />
-    <ProjectReference Include="..\BookLibrary.aspnetcore\BookLibrary.aspnetcore.UI.csproj" />
+    <ProjectReference Include="..\BookLibrary.aspnetcore.Services\BookLibrary.aspnetcore.Services.csproj" />
+    <ProjectReference Include="..\BookLibrary.aspnetcore.UI\BookLibrary.aspnetcore.UI.csproj" />
   </ItemGroup>
 
 </Project>
