@@ -18,7 +18,7 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             _apiName = apiName;
         }
 
-        public virtual async Task<bool> Create(T entity)
+        public async Task<bool> Create(T entity)
         {
             var result = false;
             using (var client = new HttpClient())
@@ -26,7 +26,7 @@ namespace BookLibrary.aspnetcore.Services.Implementations
                 client.BaseAddress = new Uri(_baseUrl);
 
                 var response = await client.PostAsJsonAsync(_apiName, entity);
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     result = true;
                 }
@@ -42,7 +42,7 @@ namespace BookLibrary.aspnetcore.Services.Implementations
                 client.BaseAddress = new Uri(_baseUrl);
 
                 var response = await client.DeleteAsync(_apiName + id);
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     result = true;
                 }
@@ -89,7 +89,7 @@ namespace BookLibrary.aspnetcore.Services.Implementations
                 client.BaseAddress = new Uri(_baseUrl);
 
                 var response = await client.PutAsJsonAsync(_apiName + entity.GetID(), entity);
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     result = true;
                 }

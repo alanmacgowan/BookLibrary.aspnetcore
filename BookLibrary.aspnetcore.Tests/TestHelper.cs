@@ -66,6 +66,7 @@ namespace BookLibrary.aspnetcore.Tests
         {
             var book = new BookViewModel
             {
+                ID = 33,
                 Title = "Book 1",
                 Description = "This is Book number 1",
                 PublishDate = DateTime.Parse("2005-09-01"),
@@ -84,6 +85,7 @@ namespace BookLibrary.aspnetcore.Tests
         {
             var book = new Book
             {
+                ID = 33,
                 Title = "Book 1",
                 Description = "This is Book number 1",
                 PublishDate = DateTime.Parse("2005-09-01"),

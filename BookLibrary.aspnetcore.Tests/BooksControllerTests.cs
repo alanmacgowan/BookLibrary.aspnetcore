@@ -31,7 +31,7 @@ namespace BookLibrary.aspnetcore.Tests
             });
             mapper = config.CreateMapper();
 
-            mockBookService = new Mock<IBookService>();
+            mockBookService = new Mock<IBookService>() { CallBase = true, };
             mockAuthorService = new Mock<IAuthorService>();
             mockPublisherService = new Mock<IPublisherService>();
 
@@ -103,26 +103,24 @@ namespace BookLibrary.aspnetcore.Tests
         }
 
         [Fact]
-        public async Task Create_RedirectsToIndex_WhenCreatedSuccessfully()
+        public async Task Details_ReturnsAViewResult_WhithCorrectBook()
         {
-            //// Arrange
-            //var bookVM = TestHelper.GetTestBookViewModel();
-            //_fixture.mockBookService.Setup(srvc => srvc.Create(_fixture.mapper.Map<BookViewModel, Book>(bookVM))).Returns(Task.FromResult(true)).Verifiable();
-            //_fixture.controller = new BooksController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            // Arrange
+            var bookVM = TestHelper.GetTestBookViewModel();
+            _fixture.mockBookService.Setup(srvc => srvc.Get(bookVM.ID)).Returns(Task.FromResult(TestHelper.GetTestBook()));
+            _fixture.controller = new BooksController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
 
-            //// Act
-            //var result = await _fixture.controller.Create(bookVM);
+            // Act
+            var result = await _fixture.controller.Details(bookVM.ID);
 
-            //// Assert
-            //_fixture.mockBookService.Verify();
-
-            //var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
-            //Assert.Equal("Books", redirectToActionResult.ControllerName);
-            //Assert.Equal("Index", redirectToActionResult.ActionName);
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<BookViewModel>(viewResult.ViewData.Model);
+            Assert.Equal(bookVM.Title, model.Title);
         }
 
         [Fact]
-        public async Task Detail_ReturnsNotFoundResult_WhenNoIdPassed()
+        public async Task Details_ReturnsNotFoundResult_WhenNoIdPassed()
         {
             // Arrange
             _fixture.controller = new BooksController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
@@ -132,6 +130,24 @@ namespace BookLibrary.aspnetcore.Tests
 
             // Assert
             Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task Create_ReturnsToSameView_WhenModelInvalid()
+        {
+            // Arrange
+            var bookVM = TestHelper.GetTestBookViewModel();
+            _fixture.controller = new BooksController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            _fixture.controller.ModelState.AddModelError("error", "some error");
+
+            // Act
+            var result = await _fixture.controller.Create(bookVM);
+
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<BookViewModel>(viewResult.ViewData.Model);
+            Assert.Equal(bookVM.Title, model.Title);
         }
 
     }
