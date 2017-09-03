@@ -21,4 +21,9 @@
     <ProjectReference Include="..\BookLibrary.aspnetcore.Services\BookLibrary.aspnetcore.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\dist\" />
+    <Folder Include="wwwroot\js\dist\" />
+  </ItemGroup>
+
 </Project>
