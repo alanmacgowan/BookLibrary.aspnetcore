@@ -28,7 +28,8 @@ gulp.task('copy:vendor:css', function () {
         libPath + '/bootstrap/dist/css/bootstrap.min.css',
         libPath + '/components-font-awesome/css/font-awesome.css',
         libPath + '/datatables.net-dt/css/jquery.dataTables.css',
-        libPath + '/bootstrap3-dialog/dist/css/bootstrap-dialog.css'
+        libPath + '/bootstrap3-dialog/dist/css/bootstrap-dialog.css',
+        nodeModulesPath + '/toastr/build/toastr.min.css'
     ])
         .pipe(concat('scripts.vendor.css'))
         .pipe(gulp.dest(cssDist));
@@ -40,7 +41,8 @@ gulp.task('copy:vendor:dev', function () {
         libPath + '/bootstrap/dist/js/bootstrap.js',
         libPath + '/datatables.net/js/jquery.dataTables.js',
         libPath + '/bootstrap3-dialog/dist/js/bootstrap-dialog.js',
-        nodeModulesPath + '/moment/moment.js'
+        nodeModulesPath + '/moment/moment.js',
+        nodeModulesPath + '/toastr/toastr.js'
     ])
         .pipe(concat('scripts.vendor.js'))
         .pipe(gulp.dest(jsDist));
