@@ -18,7 +18,7 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             _apiName = apiName;
         }
 
-        public async Task<bool> Create(T entity)
+        public virtual async Task<bool> Create(T entity)
         {
             var result = false;
             using (var client = new HttpClient())

@@ -6,6 +6,10 @@
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "components-font-awesome": "^4.7.0"
+    "components-font-awesome": "^4.7.0",
+    "datatables.net": "1.10.16",
+    "datatables.net-dt": "3.2.2",
+    "datatables.net-bs": "2.1.1",
+    "bootstrap3-dialog": "1.35.4"
   }
 }
