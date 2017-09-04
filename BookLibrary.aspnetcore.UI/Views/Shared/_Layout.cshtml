@@ -6,11 +6,11 @@
     <title>@ViewData["Title"] - BookLibrary.aspnetcore</title>
 
     <environment include="Development">
-        <link href="~/css/dist/styles.vendor.css" rel="stylesheet" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link href="~/css/dist/styles.vendor.css" rel="stylesheet" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
    </environment>
     <environment exclude="Development">
-        <link href="~/css/dist/styles.vendor.css" rel="stylesheet" />
+        <link href="~/css/dist/styles.vendor.css" rel="stylesheet" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>

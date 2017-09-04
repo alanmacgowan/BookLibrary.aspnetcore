@@ -1,4 +1,11 @@
 ﻿
+$(document).ready(function () {
+    $('body').tooltip({
+        selector: '[data-toggle=tooltip]'
+    });
+    //$('[data-toggle="tooltip"]').tooltip();
+});
+
 (function ($, window) {
     'use strict';
 

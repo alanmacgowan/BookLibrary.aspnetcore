@@ -13,14 +13,14 @@ $(document).ready(function () {
                 "mData": "id",
                 "className": "never"
             }, {
+                "sTitle": "Title",
+                "mData": "title"
+            }, {
                 "sTitle": "Publish Date",
                 "mData": "publishDate",
                 "render": function (data, type, row) {
                     return data != null ? moment(data).format("MM/DD/YYYY") : '';
                 }
-            }, {
-                "sTitle": "Title",
-                "mData": "title"
             }, {
                 "sTitle": "Category",
                 "mData": "category"
@@ -34,13 +34,14 @@ $(document).ready(function () {
                 "sTitle": "",
                 "render": function (data, type, row) {
                     var cell = '';
-                    cell += '<a class="btn btn-default" asp-action="Edit" href="/Books/Edit/' + row.id + '"><i class="fa fa-pencil"></i></a>&nbsp;';
-                    cell += '<a class="btn btn-info" asp-action="Details" href="/Books/Details/' + row.id + '"><i class="fa fa-info-circle"></i></a>&nbsp;';
-                    cell += '<a class="btn btn-danger" href="javascript:void(0)" onclick="deleteBook(' + row.id + ')"><i class="fa fa-trash-o"></i></a>';
+                    cell += '<a class="btn btn-default" asp-action="Edit" href="/Books/Edit/' + row.id + '" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;';
+                    cell += '<a class="btn btn-info" asp-action="Details" href="/Books/Details/' + row.id + '" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle"></i></a>&nbsp;';
+                    cell += '<a class="btn btn-danger" href="javascript:void(0)" onclick="deleteBook(' + row.id + ')" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></a>';
                     return cell;
                 },
                 "sName": "Select",
-                "targets": 0
+                "targets": 0,
+                "width": "20%"
             }
         ],
         "initComplete": function (settings, json) {
@@ -74,7 +75,7 @@ function deleteBook(id) {
             label: 'Yes',
             cssClass: 'btn-success',
             action: function (dialog) {
-                axios.post('/Books/DeleteBook/' + id, null, config)
+                axios.post('/Books/DeleteBook/' + id, null)
                     .then(function (response) {
                         if (response) {
                             toastr.success('Book successfully deleted.');
