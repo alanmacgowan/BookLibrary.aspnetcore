@@ -13,8 +13,9 @@ function deleteBook(id) {
             label: 'Yes',
             cssClass: 'btn-success',
             action: function (dialog) {
-                toastr.success('Book successfully deleted.');
-                //location.href = '';
+
+                utils.post({ url: '/Books/DeleteBook/' + id, successMessage: 'Book successfully deleted.' });
+
                 dialog.close();
             }
         }, {

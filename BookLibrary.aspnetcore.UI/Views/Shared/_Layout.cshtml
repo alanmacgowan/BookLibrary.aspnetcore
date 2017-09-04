@@ -6,12 +6,12 @@
     <title>@ViewData["Title"] - BookLibrary.aspnetcore</title>
 
     <environment include="Development">
+        <link href="~/css/dist/styles.vendor.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/site.css" />
-        <link href="~/css/dist/scripts.vendor.css" rel="stylesheet" />
    </environment>
     <environment exclude="Development">
+        <link href="~/css/dist/styles.vendor.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link href="~/css/dist/scripts.vendor.css" rel="stylesheet" />
     </environment>
 </head>
 <body>
@@ -48,12 +48,12 @@
     </div>
 
     <environment include="Development">
-        <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/dist/scripts.vendor.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/dist/scripts.vendor.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

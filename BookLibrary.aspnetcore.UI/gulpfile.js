@@ -33,7 +33,7 @@ gulp.task('copy:vendor:css', function () {
         nodeModulesPath + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css',
         nodeModulesPath + '/select2/dist/css/select2.min.css'
   ])
-        .pipe(concat('scripts.vendor.css'))
+        .pipe(concat('styles.vendor.css'))
         .pipe(gulp.dest(cssDist));
 });
 
@@ -46,7 +46,8 @@ gulp.task('copy:vendor:dev', function () {
         nodeModulesPath + '/moment/moment.js',
         nodeModulesPath + '/toastr/toastr.js',
         nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-        nodeModulesPath + '/select2/dist/js/select2.js'
+        nodeModulesPath + '/select2/dist/js/select2.js',
+        nodeModulesPath + '/axios/dist/axios.js'
    ])
         .pipe(concat('scripts.vendor.js'))
         .pipe(gulp.dest(jsDist));
@@ -60,7 +61,9 @@ gulp.task('copy:vendor:prod', function () {
         libPath + '/bootstrap3-dialog/dist/js/bootstrap-dialog.js',
         nodeModulesPath + '/moment/moment.js',
         nodeModulesPath + '/toastr/toastr.js',
-        nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js'
+        nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        nodeModulesPath + '/select2/dist/js/select2.js',
+        nodeModulesPath + '/axios/dist/axios.js'
     ])
         .pipe(concat('scripts.vendor.min.js'))
         .pipe(uglify())

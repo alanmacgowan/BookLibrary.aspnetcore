@@ -20,34 +20,22 @@ namespace BookLibrary.aspnetcore.Services.Implementations
 
         public virtual async Task<bool> Create(T entity)
         {
-            var result = false;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseUrl);
-
                 var response = await client.PostAsJsonAsync(_apiName, entity);
-                if (response.IsSuccessStatusCode)
-                {
-                    result = true;
-                }
+                return response.IsSuccessStatusCode;
             }
-            return result;
         }
 
         public virtual async Task<bool> Delete(int id)
         {
-            var result = false;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseUrl);
-
                 var response = await client.DeleteAsync(_apiName + id);
-                if (response.IsSuccessStatusCode)
-                {
-                    result = true;
-                }
+                return response.IsSuccessStatusCode;
             }
-            return result;
         }
 
         public virtual async Task<T> Get(int id)
@@ -56,7 +44,6 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseUrl);
-
                 var response = await client.GetAsync(_apiName + id);
                 if (response.IsSuccessStatusCode)
                 {
@@ -83,18 +70,12 @@ namespace BookLibrary.aspnetcore.Services.Implementations
 
         public virtual async Task<bool> Update(T entity)
         {
-            var result = false;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseUrl);
-
                 var response = await client.PutAsJsonAsync(_apiName + entity.GetID(), entity);
-                if (response.IsSuccessStatusCode)
-                {
-                    result = true;
-                }
+                return response.IsSuccessStatusCode;
             }
-            return result;
         }
 
     }
