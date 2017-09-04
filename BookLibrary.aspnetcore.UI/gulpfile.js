@@ -30,7 +30,8 @@ gulp.task('copy:vendor:css', function () {
         libPath + '/datatables.net-dt/css/jquery.dataTables.css',
         libPath + '/bootstrap3-dialog/dist/css/bootstrap-dialog.css',
         nodeModulesPath + '/toastr/build/toastr.min.css',
-        nodeModulesPath + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
+        nodeModulesPath + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css',
+        nodeModulesPath + '/select2/dist/css/select2.min.css'
   ])
         .pipe(concat('scripts.vendor.css'))
         .pipe(gulp.dest(cssDist));
@@ -44,7 +45,8 @@ gulp.task('copy:vendor:dev', function () {
         libPath + '/bootstrap3-dialog/dist/js/bootstrap-dialog.js',
         nodeModulesPath + '/moment/moment.js',
         nodeModulesPath + '/toastr/toastr.js',
-        nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js'
+        nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        nodeModulesPath + '/select2/dist/js/select2.js'
    ])
         .pipe(concat('scripts.vendor.js'))
         .pipe(gulp.dest(jsDist));

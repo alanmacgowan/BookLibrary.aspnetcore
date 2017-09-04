@@ -8,6 +8,7 @@
     "bower": "^1.8.0",
     "global": "^4.3.2",
     "moment": "^2.18.1",
+    "select2": "^4.0.3",
     "toastr": "^2.1.2"
   },
   "devDependencies": {
