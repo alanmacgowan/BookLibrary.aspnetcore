@@ -49,11 +49,11 @@
     </div>
     <environment include="Development">
         <script src="~/js/dist/scripts.vendor.js" asp-append-version="true"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/dist/scripts.app.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
         <script src="~/js/dist/scripts.vendor.min.js" asp-append-version="true"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/dist/scripts.app.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

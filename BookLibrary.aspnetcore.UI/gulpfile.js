@@ -16,11 +16,11 @@ gulp.task('clean', function () {
 });
 
 gulp.task('copy:libs:dev', function (done) {
-    sequence('clean', 'copy:vendor:dev', 'copy:vendor:css', done);
+    sequence('clean', 'copy:app:dev', 'copy:vendor:dev', 'copy:vendor:css', done);
 });
 
 gulp.task('copy:libs:prod', function (done) {
-    sequence('clean', 'copy:vendor:prod', 'copy:vendor:css', done);
+    sequence('clean', 'copy:app:prod', 'copy:vendor:prod', 'copy:vendor:css', done);
 });
 
 gulp.task('copy:vendor:css', function () {
@@ -37,6 +37,15 @@ gulp.task('copy:vendor:css', function () {
         .pipe(gulp.dest(cssDist));
 });
 
+gulp.task('copy:app:dev', function () {
+    return gulp.src([
+        jsPath + '/utils.js',
+        jsPath + '/backtotop.js'
+    ])
+        .pipe(concat('scripts.app.js'))
+        .pipe(gulp.dest(jsDist));
+});
+
 gulp.task('copy:vendor:dev', function () {
     return gulp.src([
         libPath + '/jquery/dist/jquery.js',
@@ -50,6 +59,16 @@ gulp.task('copy:vendor:dev', function () {
         nodeModulesPath + '/axios/dist/axios.js'
    ])
         .pipe(concat('scripts.vendor.js'))
+        .pipe(gulp.dest(jsDist));
+});
+
+gulp.task('copy:app:prod', function () {
+    return gulp.src([
+        jsPath + '/utils.js',
+        jsPath + '/backtotop.js'
+    ])
+        .pipe(concat('scripts.app.min.js'))
+        .pipe(uglify())
         .pipe(gulp.dest(jsDist));
 });
 
