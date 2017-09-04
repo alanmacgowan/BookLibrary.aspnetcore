@@ -143,7 +143,7 @@ namespace BookLibrary.aspnetcore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> DeleteBook(int id)
         {
             var deleted = await _bookService.Delete(id);
