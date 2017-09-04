@@ -6,60 +6,8 @@
 <p>
     <a class="btn btn-success" asp-action="Create"><i class="fa fa-plus"></i> Add Book</a>
 </p>
+
 <table class="dataTable display compact hover" id="booksTable" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublishDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AuthorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublisherName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublishDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AuthorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublisherName)
-                </td>
-                <td>
-                    <a class="btn btn-default" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-pencil"></i></a>
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ID"><i class="fa fa-info-circle"></i></a>
-                    <a class="btn btn-danger" href="javascript:void(0)" onclick="deleteBook(@item.ID)"><i class="fa fa-trash-o"></i></a>
-                </td>
-            </tr>
-        }
-    </tbody>
 </table>
 
 @section scripts{

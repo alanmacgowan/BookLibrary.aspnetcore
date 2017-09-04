@@ -26,12 +26,17 @@ namespace BookLibrary.aspnetcore.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
+        {
+            return View();
+       }
+
+        public async Task<IEnumerable<BookViewModel>> GetBooks()
         {
             var books = await _bookService.GetAll();
 
-            return View(_mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books));
-       }
+            return _mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
+        }
 
         // GET: Books/Details/5
         public async Task<IActionResult> Details(int? id)
