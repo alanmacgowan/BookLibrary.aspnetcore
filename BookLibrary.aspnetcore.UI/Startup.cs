@@ -1,9 +1,12 @@
 ﻿using BookLibrary.aspnetcore.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BookLibrary.aspnetcore
 {
@@ -43,12 +46,8 @@ namespace BookLibrary.aspnetcore
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
+
 }

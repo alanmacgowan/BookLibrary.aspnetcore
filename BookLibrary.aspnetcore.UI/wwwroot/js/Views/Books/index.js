@@ -53,19 +53,15 @@ $(document).ready(function () {
 });
 
 function bindTable() {
-    axios.get('/Books/GetBooks')
-        .then(function (response) {
-            booksTable.clear().draw();
 
-            if (response.data.length > 0) {
-                booksTable.rows.add(response.data).draw();
-            }
-        })
-        .catch(function (error) {
-            toastr.error('There was an error processing the operation.');
-        });
+    utils.get({ 'url': '/Books/GetBooks' }, function (response) {
+        booksTable.clear().draw();
+        if (response.data.length > 0) {
+            booksTable.rows.add(response.data).draw();
+        }
+    });
+
 }
-
 
 function deleteBook(id) {
     BootstrapDialog.show({
@@ -75,18 +71,15 @@ function deleteBook(id) {
             label: 'Yes',
             cssClass: 'btn-success',
             action: function (dialog) {
-                axios.post('/Books/DeleteBook/' + id, null)
-                    .then(function (response) {
-                        if (response) {
-                            toastr.success('Book successfully deleted.');
-                            bindTable();
-                        } else {
-                            toastr.error('There was an error processing the operation.');
-                        }
-                    })
-                    .catch(function (error) {
+
+                utils.post({ 'url': '/Books/DeleteBook/' + id }, function (response) {
+                    if (response) {
+                        toastr.success('Book successfully deleted.');
+                        bindTable();
+                    } else {
                         toastr.error('There was an error processing the operation.');
-                    });
+                    }
+                });
 
                 dialog.close();
             }
