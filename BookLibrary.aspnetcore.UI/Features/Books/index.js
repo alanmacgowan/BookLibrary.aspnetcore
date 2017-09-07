@@ -54,7 +54,7 @@ $(document).ready(function () {
 
 function bindTable() {
 
-    utils.get({ 'url': '/Books/GetBooks' }, function (response) {
+    utils.http.get({ 'url': '/Books/GetBooks' }, function (response) {
         booksTable.clear().draw();
         if (response.data.length > 0) {
             booksTable.rows.add(response.data).draw();
@@ -72,7 +72,7 @@ function deleteBook(id) {
             cssClass: 'btn-success',
             action: function (dialog) {
 
-                utils.post({ 'url': '/Books/DeleteBook/' + id }, function (response) {
+                utils.http.post({ 'url': '/Books/DeleteBook/' + id }, function (response) {
                     if (response) {
                         toastr.success('Book successfully deleted.');
                         bindTable();
