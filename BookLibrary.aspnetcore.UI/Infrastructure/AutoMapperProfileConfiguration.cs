@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using BookLibrary.aspnetcore.Domain;
 using BookLibrary.aspnetcore.UI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BookLibrary.aspnetcore.UI
+namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
     public class AutoMapperProfileConfiguration : Profile
     {

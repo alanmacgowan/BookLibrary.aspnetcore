@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
 
-namespace BookLibrary.aspnetcore.UI
+namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {

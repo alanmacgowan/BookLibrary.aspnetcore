@@ -90,5 +90,5 @@ function deleteBook(id) {
                 dialog.close();
             }
         }]
-    }).open();
+    });
 };

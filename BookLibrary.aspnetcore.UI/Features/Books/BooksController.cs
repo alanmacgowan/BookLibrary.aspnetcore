@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using BookLibrary.aspnetcore.Domain;
 using BookLibrary.aspnetcore.Services.Interfaces;
+using BookLibrary.aspnetcore.UI.Infrastructure;
 using BookLibrary.aspnetcore.UI.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace BookLibrary.aspnetcore.Controllers
+namespace BookLibrary.aspnetcore.UI.Features.Books
 {
     public class BooksController : BaseController
     {

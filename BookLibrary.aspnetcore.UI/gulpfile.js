@@ -42,12 +42,23 @@ gulp.task('clean', function () {
     return del(jsDist, { force: true });
 });
 
+gulp.task('copy:features:dev', function () {
+    return gulp.src('Features/**/*.js')
+        .pipe(gulp.dest(jsDist + '/Features'));
+});
+
+gulp.task('copy:features:prod', function () {
+    return gulp.src('Features/**/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDist + '/Features'));
+});
+
 gulp.task('copy:libs:dev', function (done) {
-    sequence('clean', 'copy:app:dev', 'copy:vendor:dev', 'copy:vendor:css', done);
+    sequence('clean', 'copy:features:dev', 'copy:app:dev', 'copy:vendor:dev', 'copy:vendor:css', 'watch', done);
 });
 
 gulp.task('copy:libs:prod', function (done) {
-    sequence('clean', 'copy:app:prod', 'copy:vendor:prod', 'copy:vendor:css', done);
+    sequence('clean', 'copy:features:prod', 'copy:app:prod', 'copy:vendor:prod', 'copy:vendor:css', done);
 });
 
 gulp.task('copy:vendor:css', function () {
@@ -84,11 +95,8 @@ gulp.task('copy:vendor:prod', function () {
 
 gulp.task('watch', function () {
 
-    gulp.watch([
-        jsPath + '/**/*.js', ['compressScripts']
-    ]);
+    gulp.watch(gulp.src('Features/**/ *.js'));
 
 });
 
-gulp.task('default', ['compressScripts', 'watch']);
 
