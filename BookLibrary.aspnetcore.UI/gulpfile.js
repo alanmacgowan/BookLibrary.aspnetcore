@@ -32,8 +32,9 @@ var jsVendorSourceFiles = [
     nodeModulesPath + '/axios/dist/axios.js'
 ];
 var jsAppSourceFiles = [
-    jsPath + '/utils.js',
-    jsPath + '/backtotop.js'
+    jsPath + '/backtotop.js',
+    jsPath + '/spin.js',
+    jsPath + '/utils.js'
 ];
 
 gulp.task('clean', function () {

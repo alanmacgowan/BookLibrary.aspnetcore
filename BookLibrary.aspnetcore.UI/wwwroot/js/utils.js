@@ -12,6 +12,17 @@ $(document).ready(function () {
 
     var utils = window.utils || {};
 
+    var spinner = new Spinner();
+
+    function showSpinner() {
+        var target = document.getElementById('main');
+        spinner.spin(target);
+    }
+
+    function hideSpinner() {
+        spinner.stop();
+    }
+
     var successMessage = 'Successful operation.';
     var errorMessage = 'There was an error processing the operation.';
 
@@ -33,9 +44,12 @@ $(document).ready(function () {
         var successFunction = successCallback || successCallbackFunction;
         var errorFunction = errorCallback || errorCallbackFunction;
 
+        showSpinner();
+
         axios.post(options.url, data, config)
             .then(function (response) {
-                successFunction(response)
+                successFunction(response);
+                hideSpinner();
             })
             .catch(function (error) {
                 errorFunction();
@@ -46,21 +60,25 @@ $(document).ready(function () {
         var successFunction = successCallback || successCallbackFunction;
         var errorFunction = errorCallback || errorCallbackFunction;
 
+        showSpinner();
+
         axios.get(options.url)
             .then(function (response) {
                 successFunction(response);
-            })
+                hideSpinner();
+           })
             .catch(function (error) {
                 errorFunction();
             });
     }
 
-
     utils = (function () {
         return {
             constructor: utils,
             post: post,
-            get: get
+            get: get,
+            showSpinner: showSpinner,
+            hideSpinner: hideSpinner
         };
     })();
 
