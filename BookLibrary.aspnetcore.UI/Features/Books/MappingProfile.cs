@@ -2,28 +2,25 @@
 using BookLibrary.aspnetcore.Domain;
 using BookLibrary.aspnetcore.UI.Models;
 
-namespace BookLibrary.aspnetcore.UI.Infrastructure
+namespace BookLibrary.aspnetcore.UI.Features.Books
 {
-    public class AutoMapperProfileConfiguration : Profile
+    public class MappingProfile : Profile
     {
-        public AutoMapperProfileConfiguration() : this("MyProfile")
-        {
-        }
-        protected AutoMapperProfileConfiguration(string profileName) : base(profileName)
+        public MappingProfile()
         {
             CreateMap<BookEditViewModel, Book>();
             CreateMap<BookViewModel, Book>();
-            CreateMap<AuthorViewModel, Author>();
-            CreateMap<PublisherViewModel, Publisher>();
 
             CreateMap<Book, BookEditViewModel>();
             CreateMap<Book, BookViewModel>()
                 .ForMember(vm => vm.AuthorName, map => map.MapFrom(b => (b.Author.LastName + ", " + b.Author.FirstName)))
-                .ForMember(vm => vm.PublisherName, map => map.MapFrom(b => b.Publisher.Name ));
+                .ForMember(vm => vm.PublisherName, map => map.MapFrom(b => b.Publisher.Name));
 
+            CreateMap<AuthorViewModel, Author>();
+            CreateMap<PublisherViewModel, Publisher>();
             CreateMap<Author, AuthorViewModel>();
             CreateMap<Publisher, PublisherViewModel>();
-
         }
+
     }
 }

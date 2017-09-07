@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,8 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper();
+
+            //Mapper.AssertConfigurationIsValid();
 
             services.AddOptions();
 

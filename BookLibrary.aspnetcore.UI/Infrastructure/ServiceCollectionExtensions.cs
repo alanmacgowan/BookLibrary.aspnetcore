@@ -28,20 +28,6 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             return collection;
         }
 
-        public static IServiceCollection AddAutoMapper(this IServiceCollection collection)
-        {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperProfileConfiguration());
-            });
-            var mapper = config.CreateMapper();
-            collection.AddSingleton(mapper);
-
-            return collection;
-        }
-
 
     }
 }
