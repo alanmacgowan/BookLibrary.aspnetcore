@@ -29,7 +29,8 @@ var jsVendorSourceFiles = [
     nodeModulesPath + '/toastr/toastr.js',
     nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     nodeModulesPath + '/select2/dist/js/select2.js',
-    nodeModulesPath + '/axios/dist/axios.js'
+    nodeModulesPath + '/axios/dist/axios.js',
+    nodeModulesPath + '/jquery-mask-plugin/dist/jquery.mask.js'
 ];
 var jsAppSourceFiles = [
     jsPath + '/backtotop.js',

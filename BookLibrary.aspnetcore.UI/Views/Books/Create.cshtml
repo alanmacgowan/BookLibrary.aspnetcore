@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label asp-for="PublishDate" class="control-label"></label>
                         <div class="input-group date">
-                            <input asp-for="PublishDate" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            <input asp-for="PublishDate" type="text" class="form-control datectrl"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
                         <span asp-validation-for="PublishDate" class="text-danger"></span>
                     </div>
@@ -37,14 +37,14 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Price" class="control-label"></label>
-                        <input asp-for="Price" class="form-control" />
+                        <input asp-for="Price" class="form-control money" />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="ISBN" class="control-label"></label>
-                        <input asp-for="ISBN" class="form-control" />
+                        <input asp-for="ISBN" class="form-control isbn13" />
                         <span asp-validation-for="ISBN" class="text-danger"></span>
                     </div>
                     <div class="form-group">
