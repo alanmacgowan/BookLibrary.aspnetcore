@@ -1,6 +1,4 @@
-using System;
-
-namespace BookLibrary.aspnetcore.Models
+namespace BookLibrary.aspnetcore.UI.Features.Shared
 {
     public class ErrorViewModel
     {
