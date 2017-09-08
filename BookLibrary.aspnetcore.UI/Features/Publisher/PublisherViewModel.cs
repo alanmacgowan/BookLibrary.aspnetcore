@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BookLibrary.aspnetcore.UI.Models
+﻿namespace BookLibrary.aspnetcore.UI.Features.Publisher
 {
     public class PublisherViewModel
     {

@@ -1,10 +1,9 @@
 ﻿using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.UI.Features.Book;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BookLibrary.aspnetcore.UI.Models
+namespace BookLibrary.aspnetcore.UI.Features.Author
 {
     public class AuthorViewModel
     {

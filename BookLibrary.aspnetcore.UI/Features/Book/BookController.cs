@@ -4,8 +4,9 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
     using AutoMapper;
     using BookLibrary.aspnetcore.Domain;
     using BookLibrary.aspnetcore.Services.Interfaces;
+    using BookLibrary.aspnetcore.UI.Features.Author;
+    using BookLibrary.aspnetcore.UI.Features.Publisher;
     using BookLibrary.aspnetcore.UI.Infrastructure;
-    using BookLibrary.aspnetcore.UI.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Linq;

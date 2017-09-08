@@ -1,9 +1,8 @@
-﻿using System;
+﻿using BookLibrary.aspnetcore.UI.Features.Author;
+using BookLibrary.aspnetcore.UI.Features.Publisher;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BookLibrary.aspnetcore.UI.Models
+namespace BookLibrary.aspnetcore.UI.Features.Book
 {
     public class BookEditViewModel : BookViewModel
     {

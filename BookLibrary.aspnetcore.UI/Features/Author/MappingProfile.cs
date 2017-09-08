@@ -2,7 +2,6 @@
 {
     using AutoMapper;
     using BookLibrary.aspnetcore.Domain;
-    using BookLibrary.aspnetcore.UI.Models;
 
     public class MappingProfile : Profile
     {
