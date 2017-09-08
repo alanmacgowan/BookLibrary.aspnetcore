@@ -44,7 +44,8 @@
         <hr />
         <a href="#0" class="cd-top">Top</a>
         <footer>
-            <p>&copy; 2017 - BookLibrary.aspnetcore</p>
+            <div class="col-md-6">&copy; 2017 - BookLibrary.aspnetcore</div>
+            <div class="col-md-6"><p class="pull-right">@(Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion)</p></div>
         </footer>
     </div>
     <environment include="Development">
