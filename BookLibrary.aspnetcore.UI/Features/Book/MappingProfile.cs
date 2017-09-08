@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using BookLibrary.aspnetcore.Domain;
-using BookLibrary.aspnetcore.UI.Models;
-
-namespace BookLibrary.aspnetcore.UI.Features.Books
+﻿namespace BookLibrary.aspnetcore.UI.Features.Book
 {
+    using AutoMapper;
+    using BookLibrary.aspnetcore.Domain;
+    using BookLibrary.aspnetcore.UI.Models;
+
     public class MappingProfile : Profile
     {
         public MappingProfile()

@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Features\Books\create.js" />
-    <Content Include="Features\Books\edit.js" />
-    <Content Include="Features\Books\index.js" />
+    <Content Include="Features\Book\create.js" />
+    <Content Include="Features\Book\edit.js" />
+    <Content Include="Features\Book\index.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Author\" />
+    <Folder Include="Features\Publisher\" />
     <Folder Include="wwwroot\css\dist\" />
     <Folder Include="wwwroot\js\dist\" />
     <Folder Include="wwwroot\js\dist\Features\" />

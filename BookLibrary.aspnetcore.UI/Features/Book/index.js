@@ -34,8 +34,8 @@ $(document).ready(function () {
                 "sTitle": "",
                 "render": function (data, type, row) {
                     var cell = '';
-                    cell += '<a class="btn btn-default" asp-action="Edit" href="/Books/Edit/' + row.id + '" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;';
-                    cell += '<a class="btn btn-info" asp-action="Details" href="/Books/Details/' + row.id + '" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle"></i></a>&nbsp;';
+                    cell += '<a class="btn btn-default" asp-action="Edit" href="/Book/Edit/' + row.id + '" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;';
+                    cell += '<a class="btn btn-info" asp-action="Details" href="/Book/Details/' + row.id + '" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle"></i></a>&nbsp;';
                     cell += '<a class="btn btn-danger" href="javascript:void(0)" onclick="deleteBook(' + row.id + ')" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></a>';
                     return cell;
                 },
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
 function bindTable() {
 
-    utils.http.get({ 'url': '/Books/GetBooks' }, function (response) {
+    utils.http.get({ 'url': '/Book/GetBooks' }, function (response) {
         booksTable.clear().draw();
         if (response.data.length > 0) {
             booksTable.rows.add(response.data).draw();
@@ -72,7 +72,7 @@ function deleteBook(id) {
             cssClass: 'btn-success',
             action: function (dialog) {
 
-                utils.http.post({ 'url': '/Books/DeleteBook/' + id }, function (response) {
+                utils.http.post({ 'url': '/Book/DeleteBook/' + id }, function (response) {
                     if (response) {
                         toastr.success('Book successfully deleted.');
                         bindTable();

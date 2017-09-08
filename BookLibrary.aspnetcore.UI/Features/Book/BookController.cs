@@ -1,22 +1,23 @@
-﻿using AutoMapper;
-using BookLibrary.aspnetcore.Domain;
-using BookLibrary.aspnetcore.Services.Interfaces;
-using BookLibrary.aspnetcore.UI.Infrastructure;
-using BookLibrary.aspnetcore.UI.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BookLibrary.aspnetcore.UI.Features.Books
+﻿
+namespace BookLibrary.aspnetcore.UI.Features.Book
 {
-    public class BooksController : BaseController
+    using AutoMapper;
+    using BookLibrary.aspnetcore.Domain;
+    using BookLibrary.aspnetcore.Services.Interfaces;
+    using BookLibrary.aspnetcore.UI.Infrastructure;
+    using BookLibrary.aspnetcore.UI.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    public class BookController : BaseController
     {
         private IBookService _bookService;
         private IAuthorService _authorService;
         private IPublisherService _publisherService;
 
-        public BooksController(IMapper mapper, IBookService bookService, 
+        public BookController(IMapper mapper, IBookService bookService,
                                IAuthorService authorService, IPublisherService publisherService) : base(mapper)
         {
             _bookService = bookService;
@@ -28,7 +29,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Books
         public ActionResult Index()
         {
             return View();
-       }
+        }
 
         public async Task<IEnumerable<BookViewModel>> GetBooks()
         {
@@ -48,7 +49,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Books
             var book = await _bookService.Get(id.Value);
 
             return View(_mapper.Map<Book, BookViewModel>(book));
-       }
+        }
 
         // GET: Books/Create
         public async Task<IActionResult> Create()
@@ -74,7 +75,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Books
                 }
 
                 return RedirectToAction(nameof(Index));
-           }
+            }
 
             return View(bookVM);
         }
@@ -93,7 +94,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Books
             bookVM.Authors = await GetAuthors();
             bookVM.Publishers = await GetPublishers();
             return View(bookVM);
-       }
+        }
 
         // POST: Books/Edit/5
         [HttpPost]
