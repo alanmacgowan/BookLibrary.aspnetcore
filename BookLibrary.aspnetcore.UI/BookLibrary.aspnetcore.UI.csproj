@@ -30,8 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Author\" />
-    <Folder Include="Features\Publisher\" />
     <Folder Include="wwwroot\css\dist\" />
     <Folder Include="wwwroot\js\dist\" />
     <Folder Include="wwwroot\js\dist\Features\" />
