@@ -72,7 +72,8 @@ $(document).ready(function () {
                 })
                 .catch(function (error) {
                     errorFunction();
-                });
+                    ui.hideSpinner();
+         });
         }
 
         function get(options, successCallback, errorCallback) {
@@ -88,7 +89,8 @@ $(document).ready(function () {
                 })
                 .catch(function (error) {
                     errorFunction();
-                });
+                    ui.hideSpinner();
+            });
         }
 
         return {

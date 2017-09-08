@@ -24,6 +24,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             collection.AddTransient<IBookService, BookService>(s => new BookService(baseUrl));
             collection.AddTransient<IAuthorService, AuthorService>(s => new AuthorService(baseUrl));
             collection.AddTransient<IPublisherService, PublisherService>(s => new PublisherService(baseUrl));
+            collection.AddTransient<IDBService, DBService>(s => new DBService(baseUrl));
 
             return collection;
         }

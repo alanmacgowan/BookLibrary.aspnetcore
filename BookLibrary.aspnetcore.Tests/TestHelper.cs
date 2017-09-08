@@ -1,8 +1,7 @@
 ﻿using BookLibrary.aspnetcore.Domain;
-using BookLibrary.aspnetcore.UI.Models;
+using BookLibrary.aspnetcore.UI.Features.Book;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BookLibrary.aspnetcore.Tests
 {
