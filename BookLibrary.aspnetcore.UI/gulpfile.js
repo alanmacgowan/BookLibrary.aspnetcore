@@ -35,7 +35,8 @@ var jsVendorSourceFiles = [
 var jsAppSourceFiles = [
     jsPath + '/backtotop.js',
     jsPath + '/spin.js',
-    jsPath + '/utils.js'
+    jsPath + '/utils.js',
+    jsPath + '/jquery.serializeObject.js'
 ];
 
 gulp.task('clean', function () {
@@ -54,7 +55,7 @@ gulp.task('copy:features:prod', function () {
 });
 
 gulp.task('copy:libs:dev', function (done) {
-    sequence('clean', 'copy:features:dev', 'copy:app:dev', 'copy:vendor:dev', 'copy:vendor:css', 'watch', done);
+    sequence('clean', 'copy:features:dev', 'copy:app:dev', 'copy:vendor:dev', 'copy:vendor:css', done);
 });
 
 gulp.task('copy:libs:prod', function (done) {

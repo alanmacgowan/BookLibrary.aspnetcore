@@ -20,6 +20,46 @@ $(document).ready(function () {
 
     var utils = window.utils || {};
 
+    var form = (function () {
+
+        function saveEdit(controller, data) {
+            saveData(controller, data, 'Edit');
+        }
+
+        function saveCreate(controller, data) {
+            saveData(controller, data, 'Create');
+        }
+
+        function saveData(controller, data, action) {
+            var values = data || $('form').serializeObject();
+            var validator = $("form").validate();
+            if (validator.form()) {
+                utils.http.post({ url: '/' + controller + '/' + action, data: values }, function (response) {
+                    if (response) {
+                        toastr.success('Successfully created.');
+                        location.href = '/' + controller;
+                    } else {
+                        toastr.error('There was an error processing the operation.');
+                    }
+                });
+            } else {
+                validator.invalidElements().each(function (index, element) {
+                    $(element).addClass('invalid-field').removeClass('valid-field');
+                });
+                validator.validElements().each(function (index, element) {
+                    $(element).addClass('valid-field').removeClass('invalid-field');
+                });
+                toastr.warning('There are some invalid fields.');
+            }
+        }
+
+        return {
+            saveCreate: saveCreate,
+            saveEdit: saveEdit
+        }
+
+    })();
+
     var ui = (function () {
 
         var spinner = new Spinner();
@@ -58,7 +98,7 @@ $(document).ready(function () {
         }
 
         function post(options, successCallback, errorCallback) {
-            var config = { headers: { 'Content-Type': 'application/json' } };
+            var config = { headers: { 'Content-Type': 'application/json; charset=utf-8' } };
             var data = options.data || null;
             var successFunction = successCallback || successCallbackFunction;
             var errorFunction = errorCallback || errorCallbackFunction;
@@ -105,6 +145,7 @@ $(document).ready(function () {
     utils = (function () {
         return {
             constructor: utils,
+            form: form,
             http: http,
             ui: ui
         };

@@ -8,5 +8,12 @@ $(document).ready(function () {
         toggleActive: true
     });
 
+    $('#save').on('click', function () {
+        utils.form.saveCreate('Book');
+    });
+
 });
+
+
+
 

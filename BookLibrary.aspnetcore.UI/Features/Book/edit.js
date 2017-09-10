@@ -8,4 +8,8 @@ $(document).ready(function () {
         toggleActive: true
     });
 
+    $('#save').on('click', function () {
+        utils.form.saveEdit('Book');
+    });
+
 });

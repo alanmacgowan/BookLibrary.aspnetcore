@@ -26,7 +26,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             _publisherService = publisherService;
         }
 
-        // GET: Books
+        // GET: Book
         public ActionResult Index()
         {
             return View();
@@ -39,7 +39,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             return _mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
         }
 
-        // GET: Books/Details/5
+        // GET: Book/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (!id.HasValue)
@@ -52,7 +52,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             return View(_mapper.Map<Book, BookViewModel>(book));
         }
 
-        // GET: Books/Create
+        // GET: Book/Create
         public async Task<IActionResult> Create()
         {
             var bookVM = new BookEditViewModel();
@@ -61,27 +61,20 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             return View(bookVM);
         }
 
-        // POST: Books/Create
+        // POST: Book/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BookViewModel bookVM)
+        public async Task<IActionResult> Create([FromBody] BookViewModel bookVM)
         {
             if (ModelState.IsValid)
             {
                 var created = await _bookService.Create(_mapper.Map<BookViewModel, Book>(bookVM));
 
-                if (!created)
-                {
-                    View(bookVM);
-                }
-
-                return RedirectToAction(nameof(Index));
+                return created ? Ok() as ActionResult : BadRequest();
             }
-
             return View(bookVM);
         }
 
-        // GET: Books/Edit/5
+        // GET: Book/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (!id.HasValue)
@@ -97,31 +90,20 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             return View(bookVM);
         }
 
-        // POST: Books/Edit/5
+        // POST: Book/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, BookViewModel bookVM)
+        public async Task<IActionResult> Edit([FromBody] BookViewModel bookVM)
         {
-            if (id != bookVM.ID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 var edited = await _bookService.Update(_mapper.Map<BookViewModel, Book>(bookVM));
 
-                if (!edited)
-                {
-                    View(bookVM);
-                }
-
-                return RedirectToAction(nameof(Index));
+                return edited ? Ok() as ActionResult : BadRequest();
             }
             return View(bookVM);
         }
 
-        // GET: Books/Delete/5
+        // GET: Book/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (!id.HasValue)
@@ -134,7 +116,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             return View(_mapper.Map<Book, BookViewModel>(book));
         }
 
-        // POST: Books/Delete/5
+        // POST: Book/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
