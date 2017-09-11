@@ -7,6 +7,7 @@ ASP.net Core MVC sample application<br/>
 * SQL Server 2016 Express LocalDB
 * Web API
 * Automapper
+* AddFeatureFolders
 * xunit
 * gulp and bower
 * jquery
