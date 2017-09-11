@@ -4,6 +4,7 @@ ASP.net Core MVC sample application<br/>
 -Using:<br/>
 * ASP.net Core MVC
 * Entity Framework
+* SQL Server 2016 Express LocalDB
 * Web API
 * Automapper
 * xunit
