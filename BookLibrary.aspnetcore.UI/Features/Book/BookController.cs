@@ -35,7 +35,6 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         public async Task<IEnumerable<BookViewModel>> GetBooks()
         {
             var books = await _bookService.GetAll();
-
             return _mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
         }
 
@@ -93,53 +92,22 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
             return edited ? Ok() as ActionResult : BadRequest();
         }
 
-        // GET: Book/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-
-            var book = await _bookService.Get(id.Value);
-
-            return View(_mapper.Map<Book, BookViewModel>(book));
-        }
-
-        // POST: Book/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var deleted = await _bookService.Delete(id);
-
-            if (!deleted)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
         [HttpPost]
         public async Task<IActionResult> DeleteBook(int id)
         {
             var deleted = await _bookService.Delete(id);
-
             return deleted ? Ok() as ActionResult : BadRequest();
         }
 
         private async Task<List<AuthorViewModel>> GetAuthors()
         {
             var authors = await _authorService.GetAll();
-
             return _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors).ToList();
         }
 
         private async Task<List<PublisherViewModel>> GetPublishers()
         {
             var publishers = await _publisherService.GetAll();
-
             return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers).ToList();
         }
 
