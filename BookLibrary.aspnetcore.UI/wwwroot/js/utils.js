@@ -35,11 +35,17 @@ $(document).ready(function () {
             var validator = $("form").validate();
             if (validator.form()) {
                 utils.http.post({ url: '/' + controller + '/' + action, data: values }, function (response) {
-                    if (response) {
+                    if (response.data) {
+                        for (var key in response.data) {
+                            var elem = $('#' + key);
+                            if (elem != null) {
+                                $(elem).addClass('invalid-field').removeClass('valid-field');
+                            }                      
+                        }
+                        toastr.warning('There are some invalid fields.');
+                    } else {
                         toastr.success('Successfully created.');
                         location.href = '/' + controller;
-                    } else {
-                        toastr.error('There was an error processing the operation.');
                     }
                 });
             } else {

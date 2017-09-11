@@ -65,13 +65,8 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] BookViewModel bookVM)
         {
-            if (ModelState.IsValid)
-            {
-                var created = await _bookService.Create(_mapper.Map<BookViewModel, Book>(bookVM));
-
-                return created ? Ok() as ActionResult : BadRequest();
-            }
-            return View(bookVM);
+            var created = await _bookService.Create(_mapper.Map<BookViewModel, Book>(bookVM));
+            return created ? Ok() as ActionResult : BadRequest();
         }
 
         // GET: Book/Edit/5
@@ -94,13 +89,8 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         [HttpPost]
         public async Task<IActionResult> Edit([FromBody] BookViewModel bookVM)
         {
-            if (ModelState.IsValid)
-            {
-                var edited = await _bookService.Update(_mapper.Map<BookViewModel, Book>(bookVM));
-
-                return edited ? Ok() as ActionResult : BadRequest();
-            }
-            return View(bookVM);
+            var edited = await _bookService.Update(_mapper.Map<BookViewModel, Book>(bookVM));
+            return edited ? Ok() as ActionResult : BadRequest();
         }
 
         // GET: Book/Delete/5

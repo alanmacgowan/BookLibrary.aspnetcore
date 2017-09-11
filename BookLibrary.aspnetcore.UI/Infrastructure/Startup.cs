@@ -26,7 +26,10 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
             services.AddCustomServices();
 
-            services.AddMvc()
+            services.AddMvc(opt =>
+                    {
+                        opt.Filters.Add(typeof(ValidatorActionFilter));
+                    })
                     .AddFeatureFolders();
         }
 
