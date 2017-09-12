@@ -8,6 +8,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
     public class AuthorViewModel
     {
         public int ID { get; set; }
+        public string AuthorName { get; set; }      
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public DateTime BirthDate { get; set; }

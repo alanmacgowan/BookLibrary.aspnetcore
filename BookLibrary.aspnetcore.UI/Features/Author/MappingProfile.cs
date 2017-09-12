@@ -7,7 +7,9 @@
     {
         public MappingProfile()
         {
-            CreateMap<Author, AuthorViewModel>().ReverseMap();
+            CreateMap<Author, AuthorViewModel>()
+                .ForMember(vm => vm.AuthorName, map => map.MapFrom(b => (b.LastName + ", " + b.FirstName)));
+
         }
 
     }

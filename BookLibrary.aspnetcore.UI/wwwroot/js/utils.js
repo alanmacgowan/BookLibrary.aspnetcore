@@ -44,7 +44,7 @@ $(document).ready(function () {
                         }
                         toastr.warning('There are some invalid fields.');
                     } else {
-                        toastr.success('Successfully created.');
+                        toastr.success('Successfull operation.');
                         location.href = '/' + controller;
                     }
                 });
