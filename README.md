@@ -10,17 +10,18 @@ ASP.net Core MVC sample application<br/>
 * AddFeatureFolders
 * xunit
 * gulp and bower
+* npm
 * jquery
 * bootstrap
 
 -UI libraries and controls used:<br/>
-* jquery datatables
-* toastr
-* bootstrap dialog
-* bootstrap datepicker
-* jquery mask
-* select2
-* spin.js
+* [jquery datatables](https://github.com/DataTables/DataTables)
+* [toastr](https://github.com/CodeSeven/toastr)
+* [bootstrap dialog](https://github.com/nakupanda/bootstrap3-dialog)
+* [bootstrap datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
+* [jquery mask](https://github.com/igorescobar/jQuery-Mask-Plugin)
+* [select2](https://github.com/select2/select2)
+* [spin.js](https://github.com/fgnass/spin.js/)
 
 ### Quick start
 
