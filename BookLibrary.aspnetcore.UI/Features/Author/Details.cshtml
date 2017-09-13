@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model BookLibrary.aspnetcore.UI.Features.Author.AuthorViewModel
 @{
+    ViewData["Title"] = "Details";
 }
+<h2>Author Details</h2>
+<div class="row">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+    </dl>
+</div>
+<br />
+<div class="form-group">
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.ID" data-toggle="tooltip" title="Edit">Edit</a>
+    <a class="btn btn-primary" asp-action="Index" data-toggle="tooltip" title="Cancel">Cancel</a>
+</div>

@@ -26,7 +26,11 @@ $(document).ready(function () {
                 "mData": "category"
             }, {
                 "sTitle": "Author",
-                "mData": "authorName"
+                "render": function (data, type, row) {
+                    var cell = '';
+                    cell += '<a href="/Author/Edit/' + row.id + '" data-toggle="tooltip" title="Edit Author">' + row.authorName + '</a>';
+                    return cell;
+                }
             }, {
                 "sTitle": "Publisher",
                 "mData": "publisherName"

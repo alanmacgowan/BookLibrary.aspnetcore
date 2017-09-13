@@ -14,14 +14,12 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
     {
         private IBookService _bookService;
         private IAuthorService _authorService;
-        private IPublisherService _publisherService;
 
         public AuthorController(IMapper mapper, IBookService bookService,
-                               IAuthorService authorService, IPublisherService publisherService) : base(mapper)
+                               IAuthorService authorService) : base(mapper)
         {
             _bookService = bookService;
             _authorService = authorService;
-            _publisherService = publisherService;
         }
 
         // GET: Author
@@ -50,11 +48,10 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         }
 
         // GET: Author/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var bookVM = new AuthorViewModel();
-            //bookVM.Books = await GetBooks();
-            return View(bookVM);
+            var authorVM = new AuthorViewModel();
+            return View(authorVM);
         }
 
         // POST: Author/Create
@@ -75,9 +72,8 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
 
             var author = await _authorService.Get(id.Value);
 
-            var bookVM = _mapper.Map<Author, AuthorViewModel>(author);
-            //bookVM.Authors = await GetBooks();
-            return View(bookVM);
+            var authorVM = _mapper.Map<Author, AuthorViewModel>(author);
+            return View(authorVM);
         }
 
         // POST: Author/Edit/5

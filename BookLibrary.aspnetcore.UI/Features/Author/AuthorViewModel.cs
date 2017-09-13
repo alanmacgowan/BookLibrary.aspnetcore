@@ -2,6 +2,7 @@
 using BookLibrary.aspnetcore.UI.Features.Book;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookLibrary.aspnetcore.UI.Features.Author
 {
@@ -9,7 +10,11 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
     {
         public int ID { get; set; }
         public string AuthorName { get; set; }      
+        [Required]
+        [StringLength(70)]
         public string LastName { get; set; }
+        [Required]
+        [StringLength(70)]
         public string FirstName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Country { get; set; }

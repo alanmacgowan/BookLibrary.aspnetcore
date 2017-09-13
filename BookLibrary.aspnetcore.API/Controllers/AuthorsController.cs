@@ -47,7 +47,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public void Post([FromBody]Author author)
         {
             _context.Add(author);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         // PUT api/authors/5
@@ -55,7 +55,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public void Put(int id, [FromBody]Author author)
         {
             _context.Update(author);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         // DELETE api/authors/5
@@ -64,7 +64,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         {
             var author = _context.Authors.SingleOrDefault(m => m.ID == id);
             _context.Authors.Remove(author);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

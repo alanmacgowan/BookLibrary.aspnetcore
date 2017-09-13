@@ -59,7 +59,7 @@ function bindTable() {
 
 function deleteAuthor(id) {
     BootstrapDialog.show({
-        title: 'Delete Book',
+        title: 'Delete Author',
         message: 'Do you want to delete this author?',
         buttons: [{
             label: 'Yes',

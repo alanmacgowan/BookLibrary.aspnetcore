@@ -9,6 +9,7 @@
         {
             CreateMap<Author, AuthorViewModel>()
                 .ForMember(vm => vm.AuthorName, map => map.MapFrom(b => (b.LastName + ", " + b.FirstName)));
+            CreateMap<AuthorViewModel, Author>();
 
         }
 
