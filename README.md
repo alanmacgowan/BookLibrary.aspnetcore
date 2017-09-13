@@ -9,12 +9,14 @@ ASP.net Core MVC sample application<br/>
 * Automapper
 * AddFeatureFolders
 * xunit
-* gulp and bower
+* gulp 
+* bower
 * npm
-* jquery
-* bootstrap
+
 
 -UI libraries and controls used:<br/>
+* [jquery](https://github.com/jquery/jquery)
+* [bootstrap](https://github.com/twbs/bootstrap)
 * [jquery datatables](https://github.com/DataTables/DataTables)
 * [toastr](https://github.com/CodeSeven/toastr)
 * [bootstrap dialog](https://github.com/nakupanda/bootstrap3-dialog)
