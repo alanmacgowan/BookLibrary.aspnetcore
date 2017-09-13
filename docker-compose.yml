@@ -6,3 +6,9 @@ services:
     build:
       context: ./BookLibrary.aspnetcore.ui
       dockerfile: Dockerfile
+
+  booklibrary.aspnetcore.api:
+    image: booklibrary.aspnetcore.api
+    build:
+      context: ./BookLibrary.aspnetcore.API
+      dockerfile: Dockerfile
