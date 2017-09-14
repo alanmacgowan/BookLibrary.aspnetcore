@@ -9,6 +9,7 @@
     <div class="col-md-12">
         <form asp-action="Create" id="create" class="editForm">
             @Html.Partial("_authorForm", Model)
+            <hr />
             <div class="form-group pull-right">
                 <input type="button" value="Save" id="save" class="btn btn-success" data-toggle="tooltip" title="Save" />
                 <a class="btn btn-primary" asp-action="Index" data-toggle="tooltip" title="Cancel">Cancel</a>

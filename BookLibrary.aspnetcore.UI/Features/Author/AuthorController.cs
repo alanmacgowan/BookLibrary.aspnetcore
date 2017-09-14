@@ -46,6 +46,17 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
 
             return View(_mapper.Map<Author, AuthorViewModel>(author));
         }
+        public async Task<IActionResult> DetailsPartial(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var author = await _authorService.Get(id.Value);
+
+            return PartialView("_authorDetails", _mapper.Map<Author, AuthorViewModel>(author));
+        }
 
         // GET: Author/Create
         public IActionResult Create()
