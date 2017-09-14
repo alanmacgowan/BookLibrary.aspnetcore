@@ -4,21 +4,26 @@ ASP.net Core MVC sample application<br/>
 -Using:<br/>
 * ASP.net Core MVC
 * Entity Framework
+* SQL Server 2016 Express LocalDB
 * Web API
 * Automapper
+* AddFeatureFolders
 * xunit
-* gulp and bower
-* jquery
-* bootstrap
+* gulp 
+* bower
+* npm
+
 
 -UI libraries and controls used:<br/>
-* jquery datatables
-* toastr
-* bootstrap dialog
-* bootstrap datepicker
-* jquery mask
-* select2
-* spin.js
+* [jquery](https://github.com/jquery/jquery)
+* [bootstrap](https://github.com/twbs/bootstrap)
+* [jquery datatables](https://github.com/DataTables/DataTables)
+* [toastr](https://github.com/CodeSeven/toastr)
+* [bootstrap dialog](https://github.com/nakupanda/bootstrap3-dialog)
+* [bootstrap datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
+* [jquery mask](https://github.com/igorescobar/jQuery-Mask-Plugin)
+* [select2](https://github.com/select2/select2)
+* [spin.js](https://github.com/fgnass/spin.js/)
 
 ### Quick start
 
