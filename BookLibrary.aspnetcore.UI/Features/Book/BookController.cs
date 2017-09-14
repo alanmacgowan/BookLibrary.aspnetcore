@@ -39,7 +39,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         }
 
         // GET: Book/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> DetailsPartial(int? id)
         {
             if (!id.HasValue)
             {
@@ -48,7 +48,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
 
             var book = await _bookService.Get(id.Value);
 
-            return View(_mapper.Map<Book, BookViewModel>(book));
+            return PartialView("_bookDetails", _mapper.Map<Book, BookViewModel>(book));
         }
 
         // GET: Book/Create

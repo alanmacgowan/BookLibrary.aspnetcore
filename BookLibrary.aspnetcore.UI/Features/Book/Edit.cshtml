@@ -12,6 +12,7 @@
         <form asp-action="Edit" id="edit" class="editForm">
             <input type="hidden" asp-for="ID" />
             @Html.Partial("_bookForm", Model)
+            <hr />
             <div class="form-group pull-right">
                 <input type="button" value="Save" id="save" class="btn btn-success" data-toggle="tooltip" title="Save" />
                 <a class="btn btn-primary" asp-action="Index" data-toggle="tooltip" title="Cancel">Cancel</a>

@@ -1,13 +1,5 @@
 ﻿@model BookLibrary.aspnetcore.UI.Features.Book.BookViewModel
-
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h2>Book Details</h2>
-
 <div class="row">
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -70,9 +62,4 @@
             @Html.DisplayFor(model => model.PublisherName)
         </dd>
     </dl>
-</div>
-<br />
-<div class="form-group">
-    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.ID" data-toggle="tooltip" title="Edit">Edit</a>
-    <a class="btn btn-primary" asp-action="Index"  data-toggle="tooltip" title="Cancel">Cancel</a>
 </div>
