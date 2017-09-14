@@ -16,9 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.API", "BookLibrary.aspnetcore.API\BookLibrary.aspnetcore.API.csproj", "{01B5DBB6-9422-4684-88F3-0A3168CA847E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.aspnetcore.Tests", "BookLibrary.aspnetcore.Tests\BookLibrary.aspnetcore.Tests.csproj", "{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.Tests", "BookLibrary.aspnetcore.Tests\BookLibrary.aspnetcore.Tests.csproj", "{616C89B0-ED9E-44E3-88E9-8E8C2207B40B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLibrary.aspnetcore.Services", "BookLibrary.aspnetcore.Services\BookLibrary.aspnetcore.Services.csproj", "{BC89BE36-DA74-4360-A6EF-9EB0806DB5CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibrary.aspnetcore.Services", "BookLibrary.aspnetcore.Services\BookLibrary.aspnetcore.Services.csproj", "{BC89BE36-DA74-4360-A6EF-9EB0806DB5CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

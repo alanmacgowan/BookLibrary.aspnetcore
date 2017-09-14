@@ -8,59 +8,8 @@
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Edit" id="edit" class="editForm">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="FirstName" class="control-label"></label>
-                        <input asp-for="FirstName" class="form-control valid-field" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="BirthDate" class="control-label"></label>
-                        <div class="input-group date">
-                            <input asp-for="BirthDate" type="text" class="form-control valid-field"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                        </div>
-                        <span asp-validation-for="BirthDate" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="LastName" class="control-label"></label>
-                        <input asp-for="LastName" class="form-control valid-field" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Country" class="control-label"></label>
-                        <input asp-for="Country" class="form-control valid-field" />
-                        <span asp-validation-for="Country" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label asp-for="About" class="control-label"></label>
-                        <textarea asp-for="About" class="form-control valid-field" rows="5"></textarea>
-                        <span asp-validation-for="About" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default active">
-                                @Html.RadioButton("Gender", 0, true, new { id = "IsMale" }) Male
-                            </label>
-                            <label class="btn btn-default">
-                                @Html.RadioButton("Gender", 1, new { id = "IsFemale" }) Female
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("_authorForm", Model)
             <div class="form-group pull-right">
                 <input type="button" value="Save" id="save" class="btn btn-success" data-toggle="tooltip" title="Save" />
                 <a class="btn btn-primary" asp-action="Index" data-toggle="tooltip" title="Cancel">Cancel</a>
