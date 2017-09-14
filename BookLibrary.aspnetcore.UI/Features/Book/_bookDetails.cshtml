@@ -53,7 +53,7 @@
             @Html.DisplayNameFor(model => model.AuthorName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AuthorName) 
+            @Html.ActionLink(Model.AuthorName, "Edit", "Author" , new { id = Model.AuthorID }, new { data_toggle = "tooltip", title = "Edit" })
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.PublisherName)
