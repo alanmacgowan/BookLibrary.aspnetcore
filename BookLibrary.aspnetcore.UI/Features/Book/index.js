@@ -28,7 +28,7 @@ $(document).ready(function () {
                 "sTitle": "Author",
                 "render": function (data, type, row) {
                     var cell = '';
-                    cell += '<a href="/Author/Edit/' + row.id + '" data-toggle="tooltip" title="Edit Author">' + row.authorName + '</a>';
+                    cell += '<a href="/Author/Edit/' + row.authorID + '" data-toggle="tooltip" title="Edit Author">' + row.authorName + '</a>';
                     return cell;
                 }
             }, {

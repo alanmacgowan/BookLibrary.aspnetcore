@@ -1,4 +1,5 @@
-﻿@model BookLibrary.aspnetcore.UI.Features.Author.AuthorViewModel
+﻿@inject IJsonHelper Json;
+@model BookLibrary.aspnetcore.UI.Features.Author.AuthorViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -32,8 +33,20 @@
         </dd>
     </dl>
 </div>
+
+<h4>Books</h4>
+<hr />
+
+<table class="dataTable display compact hover" id="booksTable" width="100%" cellspacing="0"></table>
+
 <br />
 <div class="form-group">
     <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.ID" data-toggle="tooltip" title="Edit">Edit</a>
     <a class="btn btn-primary" asp-action="Index" data-toggle="tooltip" title="Cancel">Cancel</a>
 </div>
+
+@Html.Hidden("BookList", Html.Raw(Json.Serialize(Model.Books)))
+
+@section Scripts {
+    <script src="~/js/dist/Features/Author/details.js"></script>
+}
