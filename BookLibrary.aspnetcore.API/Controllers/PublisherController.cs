@@ -64,5 +64,14 @@ namespace BookLibrary.aspnetcore.API.Controllers
             _context.Publishers.Remove(publisher);
             _context.SaveChangesAsync();
         }
+
+        [HttpGet("count")]
+        public async Task<int> GetCount()
+        {
+            var count = await _context.Publishers.CountAsync();
+
+            return count;
+        }
+
     }
 }

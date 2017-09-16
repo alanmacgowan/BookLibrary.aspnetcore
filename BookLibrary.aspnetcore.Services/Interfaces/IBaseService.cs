@@ -11,5 +11,6 @@ namespace BookLibrary.aspnetcore.Services.Interfaces
         Task<bool> Create(T book);
         Task<bool> Update(T book);
         Task<bool> Delete(int id);
+        Task<int> GetCount();
     }
 }

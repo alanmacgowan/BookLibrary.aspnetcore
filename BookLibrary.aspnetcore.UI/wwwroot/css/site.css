@@ -117,9 +117,11 @@
         bottom: 30px;
     }
 }
+
 .never {
     display: none;
 }
+
 .editForm .invalid-field {
     border-left: 5px solid #a94442;
 }
@@ -128,3 +130,44 @@
     border-left: 5px solid #42A948;
 }
 /*.select2-container .select2-selection--single*/
+
+.huge {
+    font-size: 40px;
+}
+
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+    .panel-green .panel-heading {
+        border-color: #5cb85c;
+        color: #fff;
+        background-color: #5cb85c;
+    }
+
+    .panel-green a {
+        color: #5cb85c;
+    }
+
+        .panel-green a:hover {
+            color: #3d8b3d;
+        }
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+    .panel-red .panel-heading {
+        border-color: #d9534f;
+        color: #fff;
+        background-color: #d9534f;
+    }
+
+    .panel-red a {
+        color: #d9534f;
+    }
+
+        .panel-red a:hover {
+            color: #b52b27;
+        }

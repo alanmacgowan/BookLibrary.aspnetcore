@@ -31,6 +31,14 @@ namespace BookLibrary.aspnetcore.API.Controllers
             return await books.ToListAsync();
         }
 
+        [HttpGet("count")]
+        public async Task<int> GetCount()
+        {
+            var count = await _context.Books.CountAsync();
+
+            return count;
+        }
+
         // GET api/books/5
         [HttpGet("{id}")]
         public async Task<Book> Get(int id)
@@ -52,8 +60,8 @@ namespace BookLibrary.aspnetcore.API.Controllers
             _context.SaveChanges();
         }
 
-        // PUT api/books/5
-        [HttpPut("{id}")]
+        // PUT api/books/book
+        [HttpPut("{book}")]
         public void Put(int id, [FromBody]Book book)
         {
             _context.Update(book);

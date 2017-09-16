@@ -77,5 +77,20 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             }
         }
 
+        public virtual async Task<int> GetCount()
+        {
+            var count = 0;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = await client.GetAsync(_apiName + "count");
+                if (response.IsSuccessStatusCode)
+                {
+                    count = await response.Content.ReadAsAsync<int>();
+                }
+            }
+            return count;
+        }
+
     }
 }
