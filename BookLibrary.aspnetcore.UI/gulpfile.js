@@ -4,10 +4,11 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     del = require('del'),
     sequence = require('run-sequence'),
+    cssmin = require("gulp-cssmin")
     jsPath = 'wwwroot/js',
-    jsDist = 'wwwroot/js/dist',
+    jsDist = jsPath + '/dist',
     cssPath = 'wwwroot/css',
-    cssDist = 'wwwroot/css/dist',
+    cssDist = cssPath + '/dist',
     libPath = 'wwwroot/lib',
     nodeModulesPath = 'node_modules';
 
@@ -65,6 +66,7 @@ gulp.task('copy:libs:prod', function (done) {
 gulp.task('copy:vendor:css', function () {
     return gulp.src(cssSourceFiles)
         .pipe(concat('styles.vendor.css'))
+        .pipe(cssmin())
         .pipe(gulp.dest(cssDist));
 });
 
@@ -96,7 +98,7 @@ gulp.task('copy:vendor:prod', function () {
 
 gulp.task('watch', function () {
 
-    gulp.watch(gulp.src('Features/**/ *.js'));
+    gulp.watch('Features/**/*.js', ['copy:features:dev']);
 
 });
 
