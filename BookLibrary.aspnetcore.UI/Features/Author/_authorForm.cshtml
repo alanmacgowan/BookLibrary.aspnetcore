@@ -1,4 +1,5 @@
-﻿@model BookLibrary.aspnetcore.UI.Features.Author.AuthorViewModel
+﻿@using BookLibrary.aspnetcore.Domain
+@model BookLibrary.aspnetcore.UI.Features.Author.AuthorViewModel
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row">
     <div class="col-md-6">
@@ -42,11 +43,11 @@
     <div class="col-md-12">
         <div class="form-group">
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-default active">
-                    @Html.RadioButton("Gender", 0, true, new { id = "IsMale" }) Male
+                <label class="btn btn-default @(Model.Gender == Gender.Male ? "active" : "")" >
+                    @Html.RadioButton("Gender", 0, (Model.Gender == Gender.Male), new { id = "IsMale" }) Male
                 </label>
-                <label class="btn btn-default">
-                    @Html.RadioButton("Gender", 1, new { id = "IsFemale" }) Female
+                <label class="btn btn-default @(Model.Gender == Gender.Female ? "active" : "")">
+                    @Html.RadioButton("Gender", 1, (Model.Gender == Gender.Female), new { id = "IsFemale" }) Female
                 </label>
             </div>
         </div>
