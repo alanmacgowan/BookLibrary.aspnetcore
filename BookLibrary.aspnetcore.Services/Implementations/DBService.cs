@@ -1,6 +1,7 @@
 ﻿using BookLibrary.aspnetcore.Services.Interfaces;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace BookLibrary.aspnetcore.Services.Implementations
 {
@@ -13,12 +14,13 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             _baseUrl = baseUrl;
         }
 
-        public void InitDB()
+        public async Task<bool> InitDB()
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseUrl);
-                var response = client.GetAsync("api/db/");
+                var response = await client.GetAsync("api/db/");
+                return response.IsSuccessStatusCode;
             }
         }
     }

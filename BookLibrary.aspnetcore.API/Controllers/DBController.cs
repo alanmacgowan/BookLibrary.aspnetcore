@@ -21,10 +21,10 @@ namespace BookLibrary.aspnetcore.API.Controllers
 
         // GET api/db
         [HttpGet]
-        public async Task<bool> InitDB()
+        public bool InitDB()
         {
             DbInitializer.Initialize(_context);
-            return await Task.FromResult(true);
+            return true;
         }
 
     }

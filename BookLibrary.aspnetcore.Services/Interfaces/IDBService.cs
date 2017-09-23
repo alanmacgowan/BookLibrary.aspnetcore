@@ -1,7 +1,9 @@
-﻿namespace BookLibrary.aspnetcore.Services.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace BookLibrary.aspnetcore.Services.Interfaces
 {
     public interface IDBService
     {
-        void InitDB();
+        Task<bool> InitDB();
     }
 }
