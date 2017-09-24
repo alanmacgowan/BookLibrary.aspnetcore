@@ -12,10 +12,10 @@ namespace BookLibrary.aspnetcore.Data
         {
             context.Database.EnsureCreated();
 
-            //if (context.Books.Any())
-            //{
-            //    return;   // DB has been seeded
-            //}
+            if (context.Books.Any())
+            {
+                return;   // DB has been seeded
+            }
 
             var authors = new Author[]
             {
