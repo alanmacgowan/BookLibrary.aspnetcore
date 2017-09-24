@@ -58,11 +58,11 @@ namespace BookLibrary.aspnetcore.API.Controllers
 
         // DELETE api/publishers/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<int> Delete(int id)
         {
             var publisher = _context.Publishers.SingleOrDefault(m => m.ID == id);
             _context.Publishers.Remove(publisher);
-            _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
         [HttpGet("count")]

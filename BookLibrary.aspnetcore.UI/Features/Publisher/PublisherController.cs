@@ -45,6 +45,13 @@
             return created ? Ok() as ActionResult : BadRequest();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeletePublisher(int id)
+        {
+            var deleted = await _publisherService.Delete(id);
+            return deleted ? Ok() as ActionResult : BadRequest();
+        }
+
     }
 
 }
