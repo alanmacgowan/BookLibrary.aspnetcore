@@ -1,0 +1,18 @@
+﻿@model BookLibrary.aspnetcore.UI.Features.Publisher.PublisherViewModel
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control valid-field" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label asp-for="Country" class="control-label"></label>
+            <input asp-for="Country" class="form-control valid-field" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+    </div>
+</div>

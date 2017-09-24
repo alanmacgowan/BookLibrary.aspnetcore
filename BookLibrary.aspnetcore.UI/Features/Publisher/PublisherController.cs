@@ -29,7 +29,22 @@
             var publishers = await _publisherService.GetAll();
             return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers);
         }
-        
+
+        // GET: Publisher/Create
+        public async Task<IActionResult> Create()
+        {
+            var publisherVM = new PublisherViewModel();
+            return View(publisherVM);
+        }
+
+        // POST: Publisher/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] PublisherViewModel publisherVM)
+        {
+            var created = await _publisherService.Create(_mapper.Map<PublisherViewModel, Publisher>(publisherVM));
+            return created ? Ok() as ActionResult : BadRequest();
+        }
+
     }
 
 }
