@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<h2>Publisher List</h2>
+<p>
+    <a class="btn btn-success" asp-action="Create" data-toggle="tooltip" title="Create"><i class="fa fa-plus"></i> Add Publisher</a>
+</p>
+
+<table class="dataTable display compact hover" id="publishersTable" width="100%" cellspacing="0"></table>
+
+@section scripts{
+    <script src="~/js/dist/Features/Publisher/index.js"></script>
+}
