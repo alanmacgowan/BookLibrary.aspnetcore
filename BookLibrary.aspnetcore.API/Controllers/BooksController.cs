@@ -54,27 +54,27 @@ namespace BookLibrary.aspnetcore.API.Controllers
 
         // POST api/books
         [HttpPost]
-        public void Post([FromBody]Book book)
+        public async Task<int> Post([FromBody]Book book)
         {
             _context.Add(book);
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 
         // PUT api/books/book
         [HttpPut("{book}")]
-        public void Put(int id, [FromBody]Book book)
+        public async Task<int> Put(int id, [FromBody]Book book)
         {
             _context.Update(book);
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 
         // DELETE api/books/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<int> Delete(int id)
         {
             var book = _context.Books.SingleOrDefault(m => m.ID == id);
             _context.Books.Remove(book);
-            _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
     }
 }
