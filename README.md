@@ -41,6 +41,9 @@ $ dotnet run
 # change directory to web app folder
 $ cd myapp/BookLibrary.aspnetcore.UI
 
+# install npm packages
+$ npm i
+
 # run web app
 $ dotnet run
 
