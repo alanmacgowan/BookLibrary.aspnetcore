@@ -52,6 +52,28 @@
             return deleted ? Ok() as ActionResult : BadRequest();
         }
 
+        // GET: Publisher/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var publisher = await _publisherService.Get(id.Value);
+
+            var publisherVM = _mapper.Map<Publisher, PublisherViewModel>(publisher);
+            return View(publisherVM);
+        }
+
+        // POST: Publisher/Edit/5
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromBody] PublisherViewModel publisherVM)
+        {
+            var edited = await _publisherService.Update(_mapper.Map<PublisherViewModel, Publisher>(publisherVM));
+            return edited ? Ok() as ActionResult : BadRequest();
+        }
+
     }
 
 }

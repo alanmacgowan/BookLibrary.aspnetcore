@@ -1,0 +1,24 @@
+﻿@model BookLibrary.aspnetcore.UI.Features.Publisher.PublisherViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h2>Edit Publisher</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" id="edit" class="editForm">
+            <input type="hidden" asp-for="ID" />
+            @Html.Partial("_publisherForm", Model)
+            <hr />
+            <div class="form-group pull-right">
+                <input type="button" value="Save" id="save" class="btn btn-success" data-toggle="tooltip" title="Save" />
+                <a class="btn btn-primary" asp-action="Index" data-toggle="tooltip" title="Cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/dist/Features/Publisher/edit.js"></script>
+}
