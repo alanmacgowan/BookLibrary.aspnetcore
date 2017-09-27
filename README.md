@@ -24,6 +24,7 @@ ASP.net Core MVC sample application<br/>
 * [jquery mask](https://github.com/igorescobar/jQuery-Mask-Plugin)
 * [select2](https://github.com/select2/select2)
 * [spin.js](https://github.com/fgnass/spin.js/)
+* [morris.js](https://github.com/morrisjs/morris.js/) / [raphael](https://github.com/DmitryBaranovskiy/raphael/)
 
 ### Quick start
 
