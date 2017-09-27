@@ -3,6 +3,7 @@ using BookLibrary.aspnetcore.UI.Features.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -56,23 +57,24 @@ namespace BookLibrary.aspnetcore.UI.Features.Home
             return View(dashboardVM);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IEnumerable<ChartDataViewModel> GetChartData()
+        {
+            var result = new List<ChartDataViewModel>();
+            result.Add(new ChartDataViewModel(2002, 1));
+            result.Add(new ChartDataViewModel(2003, 11));
+            result.Add(new ChartDataViewModel(2004, 3));
+            result.Add(new ChartDataViewModel(2005, 4));
+            result.Add(new ChartDataViewModel(2006, 0));
+            result.Add(new ChartDataViewModel(2007, 0));
+            result.Add(new ChartDataViewModel(2008, 7));
+            result.Add(new ChartDataViewModel(2009, 0));
+            result.Add(new ChartDataViewModel(2010, 3));
+            return result;
+        }
+
     }
 }

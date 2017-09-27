@@ -10,6 +10,8 @@
     "global": "^4.3.2",
     "jquery-mask-plugin": "^1.14.11",
     "moment": "^2.18.1",
+    "morris.js": "^0.5.0",
+    "raphael": "^2.2.7",
     "select2": "^4.0.3",
     "toastr": "^2.1.2"
   },

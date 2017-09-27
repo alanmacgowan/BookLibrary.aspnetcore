@@ -17,6 +17,14 @@
                 @Html.DisplayFor(m => m.PublishersPanel)
             </div>
         </div>
+
+        <div class="row">
+                @Html.Partial("_chart")
+        </div>
+
     </div>
 </div>
 
+@section Scripts {
+    <script src="~/js/dist/Features/Home/chart.js"></script>
+}

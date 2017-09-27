@@ -19,7 +19,8 @@ var cssSourceFiles = [
     libPath + '/bootstrap3-dialog/dist/css/bootstrap-dialog.css',
     nodeModulesPath + '/toastr/build/toastr.min.css',
     nodeModulesPath + '/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css',
-    nodeModulesPath + '/select2/dist/css/select2.min.css'
+    nodeModulesPath + '/select2/dist/css/select2.min.css',
+    nodeModulesPath + '/morris.js/morris.css'
 ];
 var jsVendorSourceFiles = [
     libPath + '/jquery/dist/jquery.js',
@@ -31,7 +32,9 @@ var jsVendorSourceFiles = [
     nodeModulesPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     nodeModulesPath + '/select2/dist/js/select2.js',
     nodeModulesPath + '/axios/dist/axios.js',
-    nodeModulesPath + '/jquery-mask-plugin/dist/jquery.mask.js'
+    nodeModulesPath + '/jquery-mask-plugin/dist/jquery.mask.js',
+    nodeModulesPath + '/morris.js/morris.js',
+    nodeModulesPath + '/raphael/raphael.js',
 ];
 var jsAppSourceFiles = [
     jsPath + '/backtotop.js',
