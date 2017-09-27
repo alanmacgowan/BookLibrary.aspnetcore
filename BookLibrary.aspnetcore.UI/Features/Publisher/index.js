@@ -23,7 +23,6 @@ $(document).ready(function () {
                 "render": function (data, type, row) {
                     var cell = '';
                     cell += '<a class="btn btn-default" asp-action="Edit" href="/Publisher/Edit/' + row.id + '" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;';
-                    cell += '<a class="btn btn-info" asp-action="Details" href="javascript:void(0)" onclick="showDetails(' + row.id + ')" data-toggle="tooltip" title="Details"><i class="fa fa-info-circle"></i></a>&nbsp;';
                     cell += '<a class="btn btn-danger" href="javascript:void(0)" onclick="deletePublisher(' + row.id + ')" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o"></i></a>';
                     return cell;
                 },

@@ -33,7 +33,11 @@ $(document).ready(function () {
                 }
             }, {
                 "sTitle": "Publisher",
-                "mData": "publisherName"
+                "render": function (data, type, row) {
+                    var cell = '';
+                    cell += '<a href="/Publisher/Edit/' + row.publisherID + '" data-toggle="tooltip" title="Edit Publisher">' + row.publisherName + '</a>';
+                    return cell;
+                }
             }, {
                 "sTitle": "",
                 "render": function (data, type, row) {

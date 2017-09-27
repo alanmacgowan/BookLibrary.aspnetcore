@@ -16,6 +16,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         [Required]
         [StringLength(70)]
         public string FirstName { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/mm/dd}")]
         public DateTime BirthDate { get; set; }
         public string Country { get; set; }
         public string About { get; set; }

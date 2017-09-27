@@ -11,6 +11,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         [Required]
         public string Description { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}")]
         public DateTime PublishDate { get; set; } = DateTime.Now;
         public string Language { get; set; }
         public string Price { get; set; } = "0";
