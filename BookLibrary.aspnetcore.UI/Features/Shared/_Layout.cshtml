@@ -7,47 +7,49 @@
 
     <environment include="Development">
         <link href="~/css/dist/styles.vendor.css" rel="stylesheet" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
    </environment>
     <environment exclude="Development">
         <link href="~/css/dist/styles.vendor.css" rel="stylesheet" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BookLibrary.aspnetcore</a>
+    <div class="col-xs-12">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BookLibrary.aspnetcore</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Book" asp-action="Index">Books</a></li>
+                        <li><a asp-area="" asp-controller="Author" asp-action="Index">Authors</a></li>
+                        <li><a asp-area="" asp-controller="Publisher" asp-action="Index">Publishers</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Book" asp-action="Index">Books</a></li>
-                    <li><a asp-area="" asp-controller="Author" asp-action="Index">Authors</a></li>
-                    <li><a asp-area="" asp-controller="Publisher" asp-action="Index">Publishers</a></li>
-
-                </ul>
-            </div>
+        </nav>
+        <div id="main" class="container body-content">
+            @RenderBody()
+            <hr />
+            <a href="#0" class="cd-top">Top</a>
+            <footer>
+                <div class="row">
+                    <div class="col-md-6">&copy; 2017 - BookLibrary.aspnetcore</div>
+                    <div class="col-md-6"><p class="pull-right">@(Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion)</p></div>
+                </div>
+            </footer>
         </div>
-    </nav>
-    <div id="main" class="container body-content">
-        @RenderBody()
-        <hr />
-        <a href="#0" class="cd-top">Top</a>
-        <footer>
-            <div class="row">
-                <div class="col-md-6">&copy; 2017 - BookLibrary.aspnetcore</div>
-                <div class="col-md-6"><p class="pull-right">@(Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion)</p></div>
-            </div>
-        </footer>
     </div>
+
     <environment include="Development">
         <script src="~/js/dist/scripts.vendor.js" asp-append-version="true"></script>
         <script src="~/js/dist/scripts.app.js" asp-append-version="true"></script>

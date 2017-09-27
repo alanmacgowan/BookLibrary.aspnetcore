@@ -8,7 +8,7 @@
                 data: response.data,
                 xkey: 'year',
                 ykeys: ['value'],
-                labels: ['value'],
+                labels: ['value', 'year'],
                 resize: true,
                 dateFormat: function (d) {
                     return d;
