@@ -5,11 +5,9 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
     public class BaseController : Controller
     {
-        protected readonly IMapper _mapper;
 
-        public BaseController(IMapper mapper)
+        public BaseController()
         {
-            _mapper = mapper;
         }
     }
 }

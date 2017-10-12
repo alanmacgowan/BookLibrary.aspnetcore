@@ -43,6 +43,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddEventSourceLogger();
 
             if (env.IsDevelopment())
             {

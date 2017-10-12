@@ -13,7 +13,7 @@
 
         private IPublisherService _publisherService;
 
-        public PublisherController(IMapper mapper, IPublisherService publisherService) : base(mapper)
+        public PublisherController(IPublisherService publisherService) : base()
         {
             _publisherService = publisherService;
         }
@@ -27,7 +27,7 @@
         public async Task<IEnumerable<PublisherViewModel>> GetPublishers()
         {
             var publishers = await _publisherService.GetAll();
-            return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers);
+            return Mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers);
         }
 
         // GET: Publisher/Create
@@ -41,7 +41,7 @@
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PublisherViewModel publisherVM)
         {
-            var created = await _publisherService.Create(_mapper.Map<PublisherViewModel, Publisher>(publisherVM));
+            var created = await _publisherService.Create(Mapper.Map<PublisherViewModel, Publisher>(publisherVM));
             return created ? Ok() as ActionResult : BadRequest();
         }
 
@@ -62,7 +62,7 @@
 
             var publisher = await _publisherService.Get(id.Value);
 
-            var publisherVM = _mapper.Map<Publisher, PublisherViewModel>(publisher);
+            var publisherVM = Mapper.Map<Publisher, PublisherViewModel>(publisher);
             return View(publisherVM);
         }
 
@@ -70,7 +70,7 @@
         [HttpPost]
         public async Task<IActionResult> Edit([FromBody] PublisherViewModel publisherVM)
         {
-            var edited = await _publisherService.Update(_mapper.Map<PublisherViewModel, Publisher>(publisherVM));
+            var edited = await _publisherService.Update(Mapper.Map<PublisherViewModel, Publisher>(publisherVM));
             return edited ? Ok() as ActionResult : BadRequest();
         }
 

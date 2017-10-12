@@ -8,6 +8,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
     using BookLibrary.aspnetcore.UI.Infrastructure;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class AuthorController : BaseController
@@ -15,8 +16,8 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         private IBookService _bookService;
         private IAuthorService _authorService;
 
-        public AuthorController(IMapper mapper, IBookService bookService,
-                               IAuthorService authorService) : base(mapper)
+        public AuthorController(IBookService bookService,
+                               IAuthorService authorService) : base()
         {
             _bookService = bookService;
             _authorService = authorService;
@@ -31,7 +32,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         public async Task<IEnumerable<AuthorViewModel>> GetAuthors()
         {
             var authors = await _authorService.GetAll();
-            return _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors);
+            return Mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors);
         }
 
         public async Task<IActionResult> DetailsPartial(int? id)
@@ -43,7 +44,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
 
             var author = await _authorService.Get(id.Value);
 
-            return PartialView("_authorDetails", _mapper.Map<Author, AuthorViewModel>(author));
+            return PartialView("_authorDetails", Mapper.Map<Author, AuthorViewModel>(author));
         }
 
         // GET: Author/Create
@@ -57,7 +58,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AuthorViewModel authorVM)
         {
-            var created = await _authorService.Create(_mapper.Map<AuthorViewModel, Author>(authorVM));
+            var created = await _authorService.Create(Mapper.Map<AuthorViewModel, Author>(authorVM));
             return created ? Ok() as ActionResult : BadRequest();
         }
 
@@ -71,7 +72,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
 
             var author = await _authorService.Get(id.Value);
 
-            var authorVM = _mapper.Map<Author, AuthorViewModel>(author);
+            var authorVM = Mapper.Map<Author, AuthorViewModel>(author);
             return View(authorVM);
         }
 
@@ -79,7 +80,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         [HttpPost]
         public async Task<IActionResult> Edit([FromBody] AuthorViewModel authorVM)
         {
-            var edited = await _authorService.Update(_mapper.Map<AuthorViewModel, Author>(authorVM));
+            var edited = await _authorService.Update(Mapper.Map<AuthorViewModel, Author>(authorVM));
             return edited ? Ok() as ActionResult : BadRequest();
         }
 
@@ -93,7 +94,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         public async Task<IEnumerable<BookViewModel>> GetBooks()
         {
             var books = await _bookService.GetAll();
-            return _mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
+            return Mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
         }
 
     }

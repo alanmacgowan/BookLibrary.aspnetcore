@@ -18,8 +18,8 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         private IAuthorService _authorService;
         private IPublisherService _publisherService;
 
-        public BookController(IMapper mapper, IBookService bookService,
-                               IAuthorService authorService, IPublisherService publisherService) : base(mapper)
+        public BookController(IBookService bookService,
+                               IAuthorService authorService, IPublisherService publisherService) : base()
         {
             _bookService = bookService;
             _authorService = authorService;
@@ -35,7 +35,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         public async Task<IEnumerable<BookViewModel>> GetBooks()
         {
             var books = await _bookService.GetAll();
-            return _mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
+            return Mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
         }
 
         // GET: Book/Details/5
@@ -48,7 +48,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
 
             var book = await _bookService.Get(id.Value);
 
-            return PartialView("_bookDetails", _mapper.Map<Book, BookViewModel>(book));
+            return PartialView("_bookDetails", Mapper.Map<Book, BookViewModel>(book));
         }
 
         // GET: Book/Create
@@ -64,7 +64,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] BookViewModel bookVM)
         {
-            var created = await _bookService.Create(_mapper.Map<BookViewModel, Book>(bookVM));
+            var created = await _bookService.Create(Mapper.Map<BookViewModel, Book>(bookVM));
             return created ? Ok() as ActionResult : BadRequest();
         }
 
@@ -78,7 +78,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
 
             var book = await _bookService.Get(id.Value);
 
-            var bookVM = _mapper.Map<Book, BookEditViewModel>(book);
+            var bookVM = Mapper.Map<Book, BookEditViewModel>(book);
             bookVM.Authors = await GetAuthors();
             bookVM.Publishers = await GetPublishers();
             return View(bookVM);
@@ -88,7 +88,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         [HttpPost]
         public async Task<IActionResult> Edit([FromBody] BookViewModel bookVM)
         {
-            var edited = await _bookService.Update(_mapper.Map<BookViewModel, Book>(bookVM));
+            var edited = await _bookService.Update(Mapper.Map<BookViewModel, Book>(bookVM));
             return edited ? Ok() as ActionResult : BadRequest();
         }
 
@@ -102,13 +102,13 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         private async Task<List<AuthorViewModel>> GetAuthors()
         {
             var authors = await _authorService.GetAll();
-            return _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors).ToList();
+            return Mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors).ToList();
         }
 
         private async Task<List<PublisherViewModel>> GetPublishers()
         {
             var publishers = await _publisherService.GetAll();
-            return _mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers).ToList();
+            return Mapper.Map<IEnumerable<Publisher>, IEnumerable<PublisherViewModel>>(publishers).ToList();
         }
 
     }
