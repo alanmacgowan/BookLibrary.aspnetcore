@@ -19,7 +19,15 @@ $(document).ready(function () {
                 "sTitle": "Publish Date",
                 "mData": "publishDate",
                 "render": function (data, type, row) {
-                    return data != null ? moment(data).format("MM/DD/YYYY") : '';
+
+                    if (data != null) {
+                        var limitDate = moment().add(-6, 'M');
+                        var newLabel = moment(data).isSameOrAfter(limitDate) ? ' <span class="label label-success">NEW!!</span>' : '';
+                        return moment(data).format("MM/DD/YYYY") + newLabel;
+                    }
+                    else {
+                        return '';
+                    }
                 }
             }, {
                 "sTitle": "Category",

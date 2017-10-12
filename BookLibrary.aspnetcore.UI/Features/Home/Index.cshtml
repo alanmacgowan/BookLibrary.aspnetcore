@@ -12,9 +12,9 @@
         </div>
         <div class="row">
             <div>
-                @Html.DisplayFor(m => m.BooksPanel)
-                @Html.DisplayFor(m => m.AuthorsPanel)
-                @Html.DisplayFor(m => m.PublishersPanel)
+                @await Component.InvokeAsync("DashboardPanel", Model.BooksPanel)
+                @await Component.InvokeAsync("DashboardPanel", Model.AuthorsPanel)
+                @await Component.InvokeAsync("DashboardPanel", Model.PublishersPanel)
             </div>
         </div>
 
