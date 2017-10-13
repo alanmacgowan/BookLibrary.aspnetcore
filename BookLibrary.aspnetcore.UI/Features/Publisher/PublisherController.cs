@@ -33,15 +33,14 @@
         // GET: Publisher/Create
         public async Task<IActionResult> Create()
         {
-            var publisherVM = new PublisherViewModel();
-            return View(publisherVM);
+            return View(new PublisherViewModel());
         }
 
         // POST: Publisher/Create
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PublisherViewModel publisherVM)
         {
-            var created = await _publisherService.Create(Mapper.Map<PublisherViewModel, Publisher>(publisherVM));
+            var created = await _publisherService.Create(publisherVM.MapTo<Publisher>());
             return created ? Ok() as ActionResult : BadRequest();
         }
 
@@ -62,15 +61,14 @@
 
             var publisher = await _publisherService.Get(id.Value);
 
-            var publisherVM = Mapper.Map<Publisher, PublisherViewModel>(publisher);
-            return View(publisherVM);
+            return View(publisher.MapTo<PublisherViewModel>());
         }
 
         // POST: Publisher/Edit/5
         [HttpPost]
         public async Task<IActionResult> Edit([FromBody] PublisherViewModel publisherVM)
         {
-            var edited = await _publisherService.Update(Mapper.Map<PublisherViewModel, Publisher>(publisherVM));
+            var edited = await _publisherService.Update(publisherVM.MapTo<Publisher>());
             return edited ? Ok() as ActionResult : BadRequest();
         }
 
