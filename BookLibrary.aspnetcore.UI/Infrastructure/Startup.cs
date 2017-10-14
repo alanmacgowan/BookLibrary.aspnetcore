@@ -31,6 +31,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             services.AddMvc(opt =>
                     {
                         opt.Filters.Add(typeof(ValidatorActionFilter));
+                        opt.ModelBinderProviders.Insert(0, new EntityModelBinderProvider());
                     })
                     .AddFeatureFolders();
 
@@ -57,7 +58,12 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
             app.UseStaticFiles();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 

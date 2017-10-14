@@ -39,15 +39,9 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         }
 
         // GET: Book/Details/5
-        public async Task<IActionResult> DetailsPartial(int? id)
+        [HttpGet("Book/DetailsPartial/{id}")]
+        public async Task<IActionResult> DetailsPartial(Book book)
         {
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-
-            var book = await _bookService.Get(id.Value);
-
             return PartialView("_bookDetails", book.MapTo<BookViewModel>());
         }
 
@@ -71,14 +65,9 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         }
 
         // GET: Book/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet("Book/Edit/{id}")]
+        public async Task<IActionResult> Edit(Book book)
         {
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-
-            var book = await _bookService.Get(id.Value);
 
             var bookVM = book.MapTo<BookEditViewModel>();
             bookVM.Authors = await GetAuthors();

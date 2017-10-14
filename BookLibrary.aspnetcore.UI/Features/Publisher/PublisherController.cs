@@ -52,15 +52,9 @@
         }
 
         // GET: Publisher/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet("Publisher/Edit/{id}")]
+        public async Task<IActionResult> Edit(Publisher publisher)
         {
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-
-            var publisher = await _publisherService.Get(id.Value);
-
             return View(publisher.MapTo<PublisherViewModel>());
         }
 

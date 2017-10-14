@@ -35,15 +35,9 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
             return Mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(authors);
         }
 
-        public async Task<IActionResult> DetailsPartial(int? id)
+        [HttpGet("Author/DetailsPartial/{id}")]
+        public async Task<IActionResult> DetailsPartial(Author author)
         {
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-
-            var author = await _authorService.Get(id.Value);
-
             return PartialView("_authorDetails", author.MapTo<AuthorViewModel>());
         }
 
@@ -62,15 +56,9 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         }
 
         // GET: Author/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet("Author/Edit/{id}")]
+        public async Task<IActionResult> Edit(Author author)
         {
-            if (!id.HasValue)
-            {
-                return NotFound();
-            }
-
-            var author = await _authorService.Get(id.Value);
-
             return View(author.MapTo<AuthorViewModel>());
         }
 
