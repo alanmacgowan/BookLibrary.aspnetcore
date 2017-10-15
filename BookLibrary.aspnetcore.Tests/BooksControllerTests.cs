@@ -71,7 +71,7 @@ namespace BookLibrary.aspnetcore.Tests
         public async Task Create_ReturnsAViewResult_WithAListOfAuthors()
         {
             // Arrange
-            _fixture.controller = new BookController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            _fixture.controller = new BookController( _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
 
             // Act
             var result = await _fixture.controller.Create();
@@ -86,7 +86,7 @@ namespace BookLibrary.aspnetcore.Tests
         public async Task Create_ReturnsAViewResult_WithAListOfPublishers()
         {
             // Arrange
-            _fixture.controller = new BookController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            _fixture.controller = new BookController(_fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
 
             // Act
             var result = await _fixture.controller.Create();
@@ -132,7 +132,7 @@ namespace BookLibrary.aspnetcore.Tests
         {
             // Arrange
             var bookVM = TestHelper.GetTestBookViewModel();
-            _fixture.controller = new BookController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            _fixture.controller = new BookController(_fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
             _fixture.controller.ModelState.AddModelError("error", "some error");
 
             // Act

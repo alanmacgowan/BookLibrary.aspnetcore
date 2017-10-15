@@ -13,10 +13,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            if (bindingContext == null)
-            {
-                throw new ArgumentNullException(nameof(bindingContext));
-            }
+            if (bindingContext == null) throw new ArgumentNullException(nameof(bindingContext));
 
             var modelName = bindingContext.BinderModelName;
             if (string.IsNullOrEmpty(modelName))
@@ -26,19 +23,13 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
             var valueProviderResult = bindingContext.ValueProvider.GetValue(modelName);
 
-            if (valueProviderResult == ValueProviderResult.None)
-            {
-                return;
-            }
+            if (valueProviderResult == ValueProviderResult.None) return;
 
             bindingContext.ModelState.SetModelValue(modelName, valueProviderResult);
 
             var value = valueProviderResult.FirstValue;
 
-            if (string.IsNullOrEmpty(value))
-            {
-                return;
-            }
+            if (string.IsNullOrEmpty(value)) return;
 
             int id = 0;
             if (!int.TryParse(value, out id))
