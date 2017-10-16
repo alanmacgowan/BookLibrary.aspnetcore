@@ -4,6 +4,8 @@ using BookLibrary.aspnetcore.UI.Features.Book;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,6 +22,8 @@ namespace BookLibrary.aspnetcore.Tests
 
         public BookControllerFixture()
         {
+            UI.Infrastructure.MapperConfiguration.Configure();
+
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MappingProfile());
@@ -53,18 +57,17 @@ namespace BookLibrary.aspnetcore.Tests
         }
 
         [Fact]
-        public async Task Index_ReturnsAViewResult_WithAListOfBooks()
+        public async Task GetBooks_ReturnsAViewResult_WithAListOfBooks()
         {
-            //// Arrange
-            //_fixture.controller = new BookController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            // Arrange
+            _fixture.controller = new BookController(_fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
 
-            //// Act
-            //var result = await _fixture.controller.Index();
+            // Act
+            var result = await _fixture.controller.GetBooks();
 
-            //// Assert
-            //var viewResult = Assert.IsType<ViewResult>(result);
-            //var model = Assert.IsAssignableFrom<IEnumerable<BookViewModel>>(viewResult.ViewData.Model);
-            //Assert.Equal(1, model.Count());
+            // Assert
+            var model = Assert.IsAssignableFrom<IEnumerable<BookViewModel>>(result);
+            Assert.Equal(1, model.Count());
         }
 
         [Fact]
@@ -98,37 +101,37 @@ namespace BookLibrary.aspnetcore.Tests
         }
 
         [Fact]
-        public async Task Details_ReturnsAViewResult_WhithCorrectBook()
+        public async Task DetailsPartial_ReturnsAViewResult_WhithCorrectBook()
         {
-            //// Arrange
-            //var bookVM = TestHelper.GetTestBookViewModel();
-            //_fixture.mockBookService.Setup(srvc => srvc.Get(bookVM.ID)).Returns(Task.FromResult(TestHelper.GetTestBook()));
-            //_fixture.controller = new BookController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            // Arrange
+            var book = TestHelper.GetTestBook();
+            _fixture.mockBookService.Setup(srvc => srvc.Get(book.ID)).Returns(Task.FromResult(TestHelper.GetTestBook()));
+            _fixture.controller = new BookController(_fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
 
-            //// Act
-            //var result = await _fixture.controller.Details(bookVM.ID);
+            // Act
+            var result = await _fixture.controller.DetailsPartial(book);
 
-            //// Assert
-            //var viewResult = Assert.IsType<ViewResult>(result);
-            //var model = Assert.IsAssignableFrom<BookViewModel>(viewResult.ViewData.Model);
-            //Assert.Equal(bookVM.Title, model.Title);
+            // Assert
+            var viewResult = Assert.IsType<PartialViewResult>(result);
+            var model = Assert.IsAssignableFrom<BookViewModel>(viewResult.ViewData.Model);
+            Assert.Equal(book.Title, model.Title);
         }
 
         [Fact]
-        public async Task Details_ReturnsNotFoundResult_WhenNoIdPassed()
+        public async Task DetailsPartial_ReturnsNotFoundResult_WhenNoIdPassed()
         {
             //// Arrange
-            //_fixture.controller = new BookController(_fixture.mapper, _fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
+            _fixture.controller = new BookController(_fixture.mockBookService.Object, _fixture.mockAuthorService.Object, _fixture.mockPublisherService.Object);
 
             //// Act
-            //var result = await _fixture.controller.Details(null);
+            var result = await _fixture.controller.DetailsPartial(null);
 
             //// Assert
-            //Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]
-        public async Task Create_ReturnsToSameView_WhenModelInvalid()
+        public async Task Create_ReturnsBadRequest_WhenModelInvalid()
         {
             // Arrange
             var bookVM = TestHelper.GetTestBookViewModel();
@@ -138,11 +141,8 @@ namespace BookLibrary.aspnetcore.Tests
             // Act
             var result = await _fixture.controller.Create(bookVM);
 
-
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<BookViewModel>(viewResult.ViewData.Model);
-            Assert.Equal(bookVM.Title, model.Title);
+            Assert.IsType<BadRequestResult>(result);
         }
 
     }
