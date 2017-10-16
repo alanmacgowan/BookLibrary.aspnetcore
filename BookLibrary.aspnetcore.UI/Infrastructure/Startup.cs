@@ -27,6 +27,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
         {
             services.AddAutoMapper();
 
+            MapperConfiguration.Configure();
             //Mapper.AssertConfigurationIsValid();
 
             services.AddOptions();
