@@ -14,7 +14,6 @@ namespace BookLibrary.aspnetcore.Tests
 
     public class BookControllerFixture : IDisposable
     {
-        public IMapper mapper;
         public BookController controller;
         public Mock<IBookService> mockBookService;
         public Mock<IAuthorService> mockAuthorService;
@@ -23,12 +22,6 @@ namespace BookLibrary.aspnetcore.Tests
         public BookControllerFixture()
         {
             UI.Infrastructure.MapperConfiguration.Configure();
-
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new MappingProfile());
-            });
-            mapper = config.CreateMapper();
 
             mockBookService = new Mock<IBookService>() { CallBase = true, };
             mockAuthorService = new Mock<IAuthorService>();
