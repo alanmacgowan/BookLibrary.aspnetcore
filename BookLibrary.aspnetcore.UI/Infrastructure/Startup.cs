@@ -10,17 +10,12 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,10 +23,6 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             services.AddAutoMapper();
 
             MapperConfiguration.Configure();
-            //Mapper.AssertConfigurationIsValid();
-
-            services.AddOptions();
-            services.Configure<AppConfiguration>(Configuration.GetSection("AppSettings"));
 
             services.AddCustomServices(Configuration);
 
@@ -49,10 +40,6 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-            loggerFactory.AddEventSourceLogger();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
