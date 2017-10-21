@@ -4,11 +4,11 @@ services:
   booklibrary.aspnetcore.ui:
     image: booklibrary.aspnetcore.ui
     build:
-      context: ./BookLibrary.aspnetcore.ui
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: BookLibrary.aspnetcore.ui/Dockerfile
 
   booklibrary.aspnetcore.api:
     image: booklibrary.aspnetcore.api
     build:
-      context: ./BookLibrary.aspnetcore.API
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: BookLibrary.aspnetcore.API/Dockerfile

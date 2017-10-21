@@ -1,9 +1,5 @@
-﻿using BookLibrary.aspnetcore.Data;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
 using System.IO;
 
 namespace BookLibrary.aspnetcore.API
@@ -12,8 +8,7 @@ namespace BookLibrary.aspnetcore.API
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
-            host.Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
