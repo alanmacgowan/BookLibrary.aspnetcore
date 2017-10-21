@@ -26,6 +26,8 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
             services.AddCustomServices(Configuration);
 
+            services.AddElm();
+
             services.AddMvc(opt =>
                     {
                         opt.Filters.Add(typeof(ValidatorActionFilter));
@@ -40,6 +42,8 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseElmPage();
+            app.UseElmCapture();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
