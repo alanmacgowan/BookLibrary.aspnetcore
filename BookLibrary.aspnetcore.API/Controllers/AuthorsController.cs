@@ -24,8 +24,8 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public async Task<IEnumerable<Author>> GetAll()
         {
             var authors = _context.Authors
-                                             .Include(b => b.Books)
-                                             .AsNoTracking();
+                                  .Include(b => b.Books)
+                                  .AsNoTracking();
 
             return await authors.ToListAsync();
         }
@@ -35,9 +35,9 @@ namespace BookLibrary.aspnetcore.API.Controllers
         public async Task<Author> Get(int id)
         {
             var author = await _context.Authors
-                               .Include(b => b.Books)
-                               .AsNoTracking()
-                               .SingleOrDefaultAsync(m => m.ID == id);
+                                       .Include(b => b.Books)
+                                       .AsNoTracking()
+                                       .SingleOrDefaultAsync(m => m.ID == id);
 
             return author;
         }

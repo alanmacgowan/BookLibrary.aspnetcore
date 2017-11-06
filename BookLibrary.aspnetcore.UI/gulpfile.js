@@ -43,7 +43,8 @@ var jsAppSourceFiles = [
     jsPath + '/backtotop.js',
     jsPath + '/spin.js',
     jsPath + '/utils.js',
-    jsPath + '/jquery.serializeObject.js'
+    jsPath + '/jquery.serializeObject.js',
+    jsPath + '/onlineDetection.js'
 ];
 
 gulp.task('clean', function () {
