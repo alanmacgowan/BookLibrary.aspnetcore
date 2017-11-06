@@ -1,11 +1,13 @@
 ﻿var CACHE_NAME = 'booklibrary-aspnetcore-cache-v1.1';
+var OFFLINE_URL = 'offline.html';
 
 var urlsToCache = [
     '/',
     '/css/dist/styles.vendor.css',
     '/css/site.css',
     '/js/dist/scripts.vendor.js',
-    '/js/dist/scripts.app.js'
+    '/js/dist/scripts.app.js',
+    OFFLINE_URL
 ]
 
 if ('serviceWorker' in navigator) {
@@ -57,8 +59,8 @@ self.addEventListener('fetch', function (event) {
 
                     var fetchRequest = event.request.clone();
 
-                    return fetch(fetchRequest).then(
-                        function (response) {
+                    return fetch(fetchRequest)
+                        .then(function (response) {
                             if (!response || response.status !== 200 || response.type !== 'basic') {
                                 return response;
                             }
@@ -70,8 +72,11 @@ self.addEventListener('fetch', function (event) {
                                     cache.put(event.request, responseToCache);
                                 });
                             return response;
-                        }
-                    );
+                        })
+                        .catch(error => {
+                            console.log('Fetch failed; returning offline page instead.', error);
+                            return caches.match(new Request(OFFLINE_URL));
+                        });
                 })
         );
     }
