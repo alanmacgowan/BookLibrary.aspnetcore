@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BookLibrary.aspnetcore</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
     <environment include="Development">
         <link href="~/css/dist/styles.vendor.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
@@ -50,7 +57,7 @@
         </div>
     </div>
 
-    <script src="~/sw.js" asp-append-version="true"></script>
+    <script src="~/sw.js"></script>
 
     <environment include="Development">
         <script src="~/js/dist/scripts.vendor.js" asp-append-version="true"></script>
