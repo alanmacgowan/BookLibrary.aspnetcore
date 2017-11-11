@@ -14,9 +14,38 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function (registration) {
         //registration was successful
         console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        showNotification();
     }).catch(function (err) {
         // registration failed
         console.log('ServiceWorker registration failed: ', err);
+    });
+}
+
+function showNotification() {
+    if (!("Notification" in window)) {
+        console.log("Este navegador no es compatible con las notificaciones de escritorio");
+    }
+    else if (Notification.permission === "granted") {
+        getNotification();
+    }
+    else if (Notification.permission !== 'denied' || Notification.permission === "default") {
+        Notification.requestPermission(function (permission) {
+            if (permission === "granted") {
+                getNotification();
+            }
+        });
+    }
+}
+
+function getNotification() {
+    var notification = new Notification('Welcome to BookLibrary!', {
+        body: 'This is a sample notification from BookLibrary',
+        image: 'books.png',
+        icon: 'android-chrome-192x192.png',
+        badge: 'android-chrome-192x192.png',
+    });
+    notification.addEventListener('click', event => {
+        event.currentTarget.close();
     });
 }
 

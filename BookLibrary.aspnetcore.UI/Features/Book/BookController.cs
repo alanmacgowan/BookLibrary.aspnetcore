@@ -69,7 +69,6 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         [HttpGet("Book/Edit/{id}")]
         public async Task<IActionResult> Edit(Book book)
         {
-
             var bookVM = book.MapTo<BookEditViewModel>();
             bookVM.Authors = await GetAuthors();
             bookVM.Publishers = await GetPublishers();

@@ -1,4 +1,5 @@
-﻿window.addEventListener('load', function (e) {
+﻿
+window.addEventListener('load', function (e) {
     updateOnlineStatus(navigator.onLine);
 }, false);
 

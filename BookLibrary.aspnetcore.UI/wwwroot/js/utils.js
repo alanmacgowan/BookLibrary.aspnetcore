@@ -146,8 +146,6 @@ $(document).ready(function () {
 
     })();
 
-
-
     utils = (function () {
         return {
             constructor: utils,
