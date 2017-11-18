@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WebApp.Models;
+using WebApp.Services;
 
 namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
@@ -37,6 +40,11 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
+
+
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +63,8 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
 
 function showNotification() {
     if (!("Notification" in window)) {
-        console.log("Este navegador no es compatible con las notificaciones de escritorio");
+        console.log("Browser not compatible with notifications.");
     }
     else if (Notification.permission === "granted") {
         getNotification();
