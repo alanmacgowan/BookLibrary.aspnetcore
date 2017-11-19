@@ -1,4 +1,5 @@
-﻿using BookLibrary.aspnetcore.Services.Implementations;
+﻿using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.Services.Implementations;
 using BookLibrary.aspnetcore.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,9 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             collection.AddTransient<IAuthorService, AuthorService>(s => new AuthorService(baseUrl));
             collection.AddTransient<IPublisherService, PublisherService>(s => new PublisherService(baseUrl));
             collection.AddTransient<IDBService, DBService>(s => new DBService(baseUrl));
+            collection.AddTransient<ISignInManagerService<ApplicationUser>, SignInManagerService<ApplicationUser>>(s => new SignInManagerService<ApplicationUser>(baseUrl, "api/Security/"));
+            collection.AddTransient<IUserManagerService<ApplicationUser>, UserManagerService<ApplicationUser>>(s => new UserManagerService<ApplicationUser>(baseUrl, "api/Security/"));
+            collection.AddTransient<IEmailSender, EmailSender>();
 
             return collection;
         }

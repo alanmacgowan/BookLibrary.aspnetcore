@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Models.AccountViewModels
+namespace BookLibrary.aspnetcore.UI.Features.Account
 {
     public class RegisterViewModel
     {

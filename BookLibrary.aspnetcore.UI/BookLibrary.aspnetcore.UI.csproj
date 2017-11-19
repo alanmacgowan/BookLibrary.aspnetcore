@@ -26,12 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookLibrary.aspnetcore.Data\BookLibrary.aspnetcore.Data.csproj" />
     <ProjectReference Include="..\BookLibrary.aspnetcore.Domain\BookLibrary.aspnetcore.Domain.csproj" />
     <ProjectReference Include="..\BookLibrary.aspnetcore.Services\BookLibrary.aspnetcore.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Account\" />
     <Folder Include="wwwroot\css\dist\" />
     <Folder Include="wwwroot\js\dist\" />
     <Folder Include="wwwroot\js\dist\Features\" />

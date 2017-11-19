@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using BookLibrary.aspnetcore.Services.Interfaces;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using WebApp.Services;
 
-namespace WebApp.Services
+namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
     public static class EmailSenderExtensions
     {

@@ -41,7 +41,7 @@
                         <li><a asp-area="" asp-controller="Author" asp-action="Index">Authors</a></li>
                         <li><a asp-area="" asp-controller="Publisher" asp-action="Index">Publishers</a></li>
                     </ul>
-                    @await Html.PartialAsync("_LoginPartial")
+                    @await Html.PartialAsync("..\\Account\\_LoginPartial")
                 </div>
             </div>
         </nav>
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <script src="~/sw.js"></script>
+    @*<script src="~/sw.js"></script>*@
 
     <environment include="Development">
         <script src="~/js/dist/scripts.vendor.js" asp-append-version="true"></script>

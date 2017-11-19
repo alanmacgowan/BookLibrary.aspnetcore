@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using BookLibrary.aspnetcore.Domain;
+using BookLibrary.aspnetcore.Services.Implementations;
+using BookLibrary.aspnetcore.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebApp.Models;
-using WebApp.Services;
+using WebApp.Data;
 
 namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
@@ -39,11 +42,6 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
                     .AddFeatureFolders();
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
-
-
-            // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
 
         }
 
