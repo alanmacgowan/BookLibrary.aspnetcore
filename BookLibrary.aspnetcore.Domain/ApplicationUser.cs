@@ -12,5 +12,9 @@ namespace BookLibrary.aspnetcore.Domain
     {
         [NotMapped]
         public string Password { get; set; }
+
+        [NotMapped]
+        public bool IsPersisted { get; set; }
+
     }
 }

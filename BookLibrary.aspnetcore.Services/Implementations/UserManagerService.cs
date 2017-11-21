@@ -5,6 +5,8 @@ using BookLibrary.aspnetcore.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
 using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BookLibrary.aspnetcore.Services.Implementations
 {
@@ -19,6 +21,16 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             _apiName = apiName;
         }
 
+        public string GetUserName(ClaimsPrincipal principal)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = client.PostAsJsonAsync(_apiName + "GetUserName", principal).Result;
+                return response.IsSuccessStatusCode ?  response.Content.ReadAsStringAsync().Result : string.Empty;
+            }
+        }
+
         public Task<IdentityResult> AddLoginAsync(TUser user, UserLoginInfo login)
         {
             throw new System.NotImplementedException();
@@ -31,15 +43,7 @@ namespace BookLibrary.aspnetcore.Services.Implementations
 
         public async Task<IdentityResult> CreateAsync(TUser user, string password)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_baseUrl);
-                var response = await client.PostAsJsonAsync(_apiName, user);
-                if (response.IsSuccessStatusCode)
-                {
-                }
-                return new IdentityResult();
-            }
+            throw new System.NotImplementedException();
         }
 
         public async Task<IdentityResult> CreateAsync(TUser user)
@@ -47,11 +51,18 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_baseUrl);
-                var response = await client.PostAsJsonAsync(_apiName, user);
+                var response = await client.PostAsJsonAsync(_apiName + "CreateAsync", user);
                 if (response.IsSuccessStatusCode)
                 {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    var errors = result["errors"];
+                    return result["succeeded"] as bool? == true ? IdentityResult.Success : IdentityResult.Failed();
                 }
-                return new IdentityResult();
+                else
+                {
+                    return IdentityResult.Failed();
+                }
             }
         }
 
@@ -65,9 +76,14 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<string> GenerateEmailConfirmationTokenAsync(TUser user)
+        public async Task<string> GenerateEmailConfirmationTokenAsync(TUser user)
         {
-            throw new System.NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = await client.PostAsJsonAsync(_apiName + "GenerateEmailConfirmationTokenAsync", user);
+                return response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : string.Empty;
+            }
         }
 
         public Task<string> GeneratePasswordResetTokenAsync(TUser user)

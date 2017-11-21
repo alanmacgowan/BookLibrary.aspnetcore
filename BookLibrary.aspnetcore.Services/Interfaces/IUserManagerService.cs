@@ -7,6 +7,8 @@ namespace BookLibrary.aspnetcore.Services.Interfaces
 {
     public interface IUserManagerService<TUser> where TUser : ApplicationUser
     {
+        string GetUserName(ClaimsPrincipal principal);
+
         string GetUserId(ClaimsPrincipal principal);
 
         Task<IdentityResult> CreateAsync(TUser user, string password);

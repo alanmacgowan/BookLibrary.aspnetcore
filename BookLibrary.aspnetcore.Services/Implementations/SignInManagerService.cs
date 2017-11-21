@@ -3,6 +3,9 @@ using BookLibrary.aspnetcore.Domain;
 using BookLibrary.aspnetcore.Services.Interfaces;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Http;
+using System;
+using System.Security.Claims;
 
 namespace BookLibrary.aspnetcore.Services.Implementations
 {
@@ -37,9 +40,13 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task SignInAsync(TUser user, bool isPersistent, string authenticationMethod = null)
+        public async Task SignInAsync(TUser user, bool isPersistent = false, string authenticationMethod = null)
         {
-            throw new System.NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                await client.PostAsJsonAsync(_apiName + "SignInAsync", user);
+            }
         }
 
         public Task SignOutAsync()
@@ -55,6 +62,16 @@ namespace BookLibrary.aspnetcore.Services.Implementations
         public Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(string recoveryCode)
         {
             throw new System.NotImplementedException();
+        }
+
+        public async Task<bool> IsSignedIn(ClaimsPrincipal principal)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = await client.PostAsJsonAsync(_apiName + "IsSignedIn", principal);
+                return response.IsSuccessStatusCode ? await response.Content.ReadAsAsync<bool>() : false;
+            }
         }
     }
 }
