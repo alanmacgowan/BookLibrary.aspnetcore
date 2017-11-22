@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
 
 function showNotification() {
     if (!("Notification" in window)) {
-        console.log("Este navegador no es compatible con las notificaciones de escritorio");
+        console.log("This browser does not support notifications");
     }
     else if (Notification.permission === "granted") {
         getNotification();
@@ -60,9 +60,7 @@ self.addEventListener('install', function (event) {
 });
 
 self.addEventListener('activate', function (event) {
-
     var cacheWhitelist = [CACHE_NAME];
-
     event.waitUntil(
         caches.keys().then(function (cacheNames) {
             return Promise.all(
