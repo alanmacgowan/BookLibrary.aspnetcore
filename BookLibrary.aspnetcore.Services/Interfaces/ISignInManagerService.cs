@@ -10,7 +10,7 @@ namespace BookLibrary.aspnetcore.Services.Interfaces
     {
         Task<bool> IsSignedIn(ClaimsPrincipal principal);
 
-        Task<SignInResult> PasswordSignInAsync(string userName, string password, bool isPersistent, bool lockoutOnFailure);
+        Task<SignInResult> PasswordSignInAsync(TUser user);
 
         Task<TUser> GetTwoFactorAuthenticationUserAsync();
 

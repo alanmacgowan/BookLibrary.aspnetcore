@@ -16,5 +16,10 @@ namespace BookLibrary.aspnetcore.Domain
         [NotMapped]
         public bool IsPersisted { get; set; }
 
+        [NotMapped]
+        public bool LockoutOnFailure { get; set; }
+      
+        [NotMapped]
+        public bool RememberMe { get; set; }
     }
 }

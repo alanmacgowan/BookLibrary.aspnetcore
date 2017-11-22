@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
 using System;
 using System.Security.Claims;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BookLibrary.aspnetcore.Services.Implementations
 {
@@ -35,9 +37,23 @@ namespace BookLibrary.aspnetcore.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<SignInResult> PasswordSignInAsync(string userName, string password, bool isPersistent, bool lockoutOnFailure)
+        public async Task<SignInResult> PasswordSignInAsync(TUser user)
         {
-            throw new System.NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                var response = await client.PostAsJsonAsync(_apiName + "PasswordSignInAsync", user);
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                    return result["succeeded"] as bool? == true ? SignInResult.Success : SignInResult.Failed;
+                }
+                else
+                {
+                    return SignInResult.Failed;
+                }
+            }
         }
 
         public async Task SignInAsync(TUser user, bool isPersistent = false, string authenticationMethod = null)
@@ -68,9 +84,10 @@ namespace BookLibrary.aspnetcore.Services.Implementations
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_baseUrl);
-                var response = await client.PostAsJsonAsync(_apiName + "IsSignedIn", principal);
-                return response.IsSuccessStatusCode ? await response.Content.ReadAsAsync<bool>() : false;
+                //client.BaseAddress = new Uri(_baseUrl);
+                //var response = await client.PostAsJsonAsync(_apiName + "IsSignedIn", principal);
+                //return response.IsSuccessStatusCode ? await response.Content.ReadAsAsync<bool>() : false;
+                return principal.Identity.IsAuthenticated;
             }
         }
     }

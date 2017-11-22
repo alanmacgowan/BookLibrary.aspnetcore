@@ -57,5 +57,11 @@ namespace BookLibrary.aspnetcore.API.Controllers
             //var result = principal == null ? false : _signInManager.IsSignedIn(principal);
             return await Task.FromResult(false);
         }
+
+        [HttpPost("PasswordSignInAsync")]
+        public async Task<Microsoft.AspNetCore.Identity.SignInResult> PasswordSignInAsync([FromBody]ApplicationUser user)
+        {
+            return await _signInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, user.LockoutOnFailure);
+        }
     }
 }
