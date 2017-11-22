@@ -50,6 +50,6 @@ $ dotnet run
 ```
 
 This will start the web api server (Kestrel) on https://localhost:44324/.
-Then open a browser in [https://localhost:44324/](https://localhost:44324/]) to see the application running. 
+Then open a browser in [https://localhost:44386/](https://localhost:44386/]) to see the application running. 
 
 
