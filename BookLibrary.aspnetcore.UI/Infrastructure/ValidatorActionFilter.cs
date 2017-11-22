@@ -12,8 +12,7 @@
             {
                 if (filterContext.HttpContext.Request.Method == "GET")
                 {
-                    var result = new BadRequestResult();
-                    filterContext.Result = result;
+                    filterContext.Result = new BadRequestResult();
                 }
                 else
                 {
