@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BookLibrary.aspnetcore.Data;
 using Microsoft.AspNetCore.Mvc;
-using BookLibrary.aspnetcore.Data;
-using Microsoft.EntityFrameworkCore;
-using BookLibrary.aspnetcore.Domain;
 
 namespace BookLibrary.aspnetcore.API.Controllers
 {
