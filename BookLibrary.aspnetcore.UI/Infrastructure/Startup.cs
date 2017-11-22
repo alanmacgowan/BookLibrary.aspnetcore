@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,6 +32,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 
             services.AddMvc(opt =>
                     {
+                        opt.Filters.Add(new RequireHttpsAttribute());
                         opt.Filters.Add(typeof(ValidatorActionFilter));
                         opt.ModelBinderProviders.Insert(0, new EntityModelBinderProvider());
                     })
@@ -53,6 +56,8 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44386));
 
             app.UseStaticFiles();
 

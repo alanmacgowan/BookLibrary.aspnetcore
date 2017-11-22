@@ -1,6 +1,8 @@
 ﻿using BookLibrary.aspnetcore.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +23,12 @@ namespace BookLibrary.aspnetcore.API
         {
             services.AddDbContext<BookLibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc()
-                    .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add(new RequireHttpsAttribute());
+            })
+            .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +38,8 @@ namespace BookLibrary.aspnetcore.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44324));
 
             app.UseMvc();
         }
