@@ -61,18 +61,21 @@ namespace BookLibrary.aspnetcore.UI.Features.Home
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         public IEnumerable<ChartDataViewModel> GetChartData()
         {
-            var result = new List<ChartDataViewModel>();
-            result.Add(new ChartDataViewModel(2002, 1));
-            result.Add(new ChartDataViewModel(2003, 11));
-            result.Add(new ChartDataViewModel(2004, 3));
-            result.Add(new ChartDataViewModel(2005, 4));
-            result.Add(new ChartDataViewModel(2006, 0));
-            result.Add(new ChartDataViewModel(2007, 0));
-            result.Add(new ChartDataViewModel(2008, 7));
-            result.Add(new ChartDataViewModel(2009, 0));
-            result.Add(new ChartDataViewModel(2010, 3));
+            var result = new List<ChartDataViewModel>
+            {
+                new ChartDataViewModel(2002, 1),
+                new ChartDataViewModel(2003, 11),
+                new ChartDataViewModel(2004, 3),
+                new ChartDataViewModel(2005, 4),
+                new ChartDataViewModel(2006, 0),
+                new ChartDataViewModel(2007, 0),
+                new ChartDataViewModel(2008, 7),
+                new ChartDataViewModel(2009, 0),
+                new ChartDataViewModel(2010, 3)
+            };
             return result;
         }
 

@@ -38,7 +38,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         [HttpGet("Author/DetailsPartial/{id}")]
         public async Task<IActionResult> DetailsPartial(Author author)
         {
-            return PartialView("_authorDetails", author.MapTo<AuthorViewModel>());
+            return await Task.FromResult(PartialView("_authorDetails", author.MapTo<AuthorViewModel>()));
         }
 
         // GET: Author/Create
@@ -59,7 +59,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Author
         [HttpGet("Author/Edit/{id}")]
         public async Task<IActionResult> Edit(Author author)
         {
-            return View(author.MapTo<AuthorViewModel>());
+            return await Task.FromResult(View(author.MapTo<AuthorViewModel>()));
         }
 
         // POST: Author/Edit/5

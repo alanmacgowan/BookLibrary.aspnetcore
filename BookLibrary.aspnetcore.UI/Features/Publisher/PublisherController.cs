@@ -33,7 +33,7 @@
         // GET: Publisher/Create
         public async Task<IActionResult> Create()
         {
-            return View(new PublisherViewModel());
+            return await Task.FromResult(View(new PublisherViewModel()));
         }
 
         // POST: Publisher/Create
@@ -55,7 +55,7 @@
         [HttpGet("Publisher/Edit/{id}")]
         public async Task<IActionResult> Edit(Publisher publisher)
         {
-            return View(publisher.MapTo<PublisherViewModel>());
+            return await Task.FromResult(View(publisher.MapTo<PublisherViewModel>()));
         }
 
         // POST: Publisher/Edit/5

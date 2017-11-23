@@ -43,7 +43,7 @@ namespace BookLibrary.aspnetcore.UI.Features.Book
         public async Task<IActionResult> DetailsPartial(Book book)
         {
             if (book == null) return NotFound();
-            return PartialView("_bookDetails", book.MapTo<BookViewModel>());
+            return await Task.FromResult(PartialView("_bookDetails", book.MapTo<BookViewModel>()));
         }
 
         // GET: Book/Create

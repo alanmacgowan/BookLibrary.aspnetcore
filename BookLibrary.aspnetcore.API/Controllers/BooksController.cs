@@ -23,33 +23,28 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Book>> GetAll()
         {
-            var books = _context.Books
+            return await _context.Books
                                 .Include(b => b.Author)
                                 .Include(b => b.Publisher)
-                                .AsNoTracking();
-
-            return await books.ToListAsync();
+                                .AsNoTracking()
+                                .ToListAsync();
         }
 
         [HttpGet("count")]
         public async Task<int> GetCount()
         {
-            var count = await _context.Books.CountAsync();
-
-            return count;
+            return await _context.Books.CountAsync();
         }
 
         // GET api/books/5
         [HttpGet("{id}")]
         public async Task<Book> Get(int id)
         {
-            var book = await _context.Books
-                                     .Include(b => b.Author)
-                                     .Include(b => b.Publisher)
-                                     .AsNoTracking()
-                                     .SingleOrDefaultAsync(m => m.ID == id);
-
-            return book;
+            return await _context.Books
+                                 .Include(b => b.Author)
+                                 .Include(b => b.Publisher)
+                                 .AsNoTracking()
+                                 .SingleOrDefaultAsync(m => m.ID == id);
         }
 
         // POST api/books

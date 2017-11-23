@@ -23,23 +23,20 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Author>> GetAll()
         {
-            var authors = _context.Authors
+            return await _context.Authors
                                   .Include(b => b.Books)
-                                  .AsNoTracking();
-
-            return await authors.ToListAsync();
+                                  .AsNoTracking()
+                                  .ToListAsync();
         }
 
         // GET api/authors/5
         [HttpGet("{id}")]
         public async Task<Author> Get(int id)
         {
-            var author = await _context.Authors
-                                       .Include(b => b.Books)
-                                       .AsNoTracking()
-                                       .SingleOrDefaultAsync(m => m.ID == id);
-
-            return author;
+            return await _context.Authors
+                                 .Include(b => b.Books)
+                                 .AsNoTracking()
+                                 .SingleOrDefaultAsync(m => m.ID == id);
         }
 
         // POST api/authors
@@ -70,9 +67,7 @@ namespace BookLibrary.aspnetcore.API.Controllers
         [HttpGet("count")]
         public async Task<int> GetCount()
         {
-            var count = await _context.Authors.CountAsync();
-
-            return count;
+            return await _context.Authors.CountAsync();
         }
 
     }

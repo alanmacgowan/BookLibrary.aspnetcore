@@ -7,7 +7,7 @@ namespace BookLibrary.aspnetcore.UI.Infrastructure
 {
     public class AppConfiguration
     {
-        public string BaseUrl { get; set; } = "http://localhost:5000/";
+        public string BaseUrl { get; set; } = "https://localhost:44324/";
 
     }
 }
