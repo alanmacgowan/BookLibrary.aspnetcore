@@ -19,6 +19,10 @@ namespace BookLibrary.aspnetcore.API.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Gets all available Authors
+        /// </summary>
+        /// <returns>List of Authors</returns>
         // GET api/authors
         [HttpGet]
         public async Task<IEnumerable<Author>> GetAll()
@@ -29,6 +33,11 @@ namespace BookLibrary.aspnetcore.API.Controllers
                                   .ToListAsync();
         }
 
+        /// <summary>
+        /// Gets an individual Author by Id
+        /// </summary>
+        /// <param name="id">Author identifier</param>
+        /// <returns></returns>
         // GET api/authors/5
         [HttpGet("{id}")]
         public async Task<Author> Get(int id)
