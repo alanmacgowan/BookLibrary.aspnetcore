@@ -49,7 +49,8 @@ $ dotnet run
 
 ```
 
-This will start the web api server (Kestrel) on https://localhost:44324/.
-Then open a browser in [https://localhost:44386/](https://localhost:44386/]) to see the application running. 
+This will start the web api server (Kestrel) on https://localhost:44324/.<br/>
+Then open a browser in [https://localhost:44386/](https://localhost:44386/]) to see the application running. <br/>
+You can view API documentation provided by Swagger in https://localhost:44324/swagger
 
 
